@@ -21,7 +21,7 @@ module.exports = {
     client: 'mysql',
     connection: {
       host: process.env.DB_HOST || '127.0.0.1',
-      database: process.env.DB_NAME || 'voting-app',
+      database: process.env.DB_NAME || 'voting_app',
       user: process.env.DB_USER || 'root',
       password: process.env.DB_PASSOWRD || 'root'
     },
@@ -38,7 +38,7 @@ module.exports = {
     client: 'mysql',
     connection: {
       host: process.env.DB_HOST || '127.0.0.1',
-      database: process.env.DB_NAME || 'voting-app',
+      database: process.env.DB_NAME || 'voting_app',
       user: process.env.DB_USER || 'root',
       password: process.env.DB_PASSOWRD || 'root'
     },
