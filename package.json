@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/JorgeLNJunior/voting-app-back-end/issues"
   },
-  "homepage": "https://github.com/JorgeLNJunior/voting-app-back-end#readme"
+  "homepage": "https://github.com/JorgeLNJunior/voting-app-back-end#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
 }
