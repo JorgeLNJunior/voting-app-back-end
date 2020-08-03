@@ -24,7 +24,9 @@
     "mysql": "^2.18.1"
   },
   "devDependencies": {
+    "@types/jest": "^26.0.8",
     "husky": "^4.2.5",
+    "jest": "^26.2.2",
     "lint-staged": "^10.2.11",
     "sqlite3": "^5.0.0",
     "standard": "^14.3.4"
