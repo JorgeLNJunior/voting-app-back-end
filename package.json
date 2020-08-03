@@ -9,7 +9,9 @@
     "test": "NODE_ENV=test jest"
   },
   "standard": {
-    "env": ["jest"]
+    "env": [
+      "jest"
+    ]
   },
   "repository": {
     "type": "git",
@@ -34,6 +36,7 @@
     "lint-staged": "^10.2.11",
     "nodemon": "^2.0.4",
     "sqlite3": "^5.0.0",
-    "standard": "^14.3.4"
+    "standard": "^14.3.4",
+    "supertest": "^4.0.2"
   }
 }
