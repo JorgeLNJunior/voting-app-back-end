@@ -19,7 +19,9 @@
   "homepage": "https://github.com/JorgeLNJunior/voting-app-back-end#readme",
   "dependencies": {
     "dotenv": "^8.2.0",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "knex": "^0.21.2",
+    "mysql": "^2.18.1"
   },
   "devDependencies": {
     "husky": "^4.2.5",
