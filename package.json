@@ -22,6 +22,7 @@
     "express": "^4.17.1"
   },
   "devDependencies": {
+    "lint-staged": "^10.2.11",
     "standard": "^14.3.4"
   }
 }
