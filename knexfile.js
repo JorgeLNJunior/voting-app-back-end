@@ -13,7 +13,8 @@ module.exports = {
     },
     seeds: {
       directory: `${__dirname}/src/database/seeds`
-    }
+    },
+    useNullAsDefault: true
   },
 
   development: {
