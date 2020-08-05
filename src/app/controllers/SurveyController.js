@@ -14,6 +14,15 @@ class SurveyController {
       return res.status(500).json({ error: 'internal error' })
     }
   }
+
+  async show (req, res) {
+    try {
+      const survey = await Survey.getById(req.params.id)
+      return res.json({ survey })
+    } catch (error) {
+      return res.status(500).json({ error: 'interrnal error' })
+    }
+  }
 }
 
 module.exports = new SurveyController()
