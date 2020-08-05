@@ -75,4 +75,17 @@ describe('Survey', () => {
 
     expect(response.status).toBe(400)
   })
+
+  it('Should return 400 if options is not provided', async () => {
+    const body = {
+      title: 'Framework front-end',
+      description: 'preferência de framework front-end'
+    }
+
+    const response = await request(app)
+      .post('/surveys')
+      .send(body)
+
+    expect(response.status).toBe(400)
+  })
 })
