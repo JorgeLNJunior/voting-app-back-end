@@ -17,6 +17,13 @@ class Survey {
 
     return survey[0]
   }
+
+  async getById (id) {
+    const survey = await knex('surveys').where({ id }).first()
+    const options = await knex('options').where({ survey_id: id })
+    survey.options = options
+    return survey
+  }
 }
 
 module.exports = new Survey()
