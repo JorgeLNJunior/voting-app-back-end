@@ -11,6 +11,9 @@ class SurveyController {
     if (!req.body.options) {
       return res.status(400).json({ error: 'field options is required' })
     }
+    if (req.body.options.length <= 0) {
+      return res.status(400).json({ error: 'field options cannot be empty' })
+    }
     try {
       const survey = await Survey.create(req.body)
       return res.json({ survey })
