@@ -58,4 +58,21 @@ describe('Survey', () => {
 
     expect(response.status).toBe(400)
   })
+
+  it('Should return 400 if description is not provided', async () => {
+    const body = {
+      title: 'Framework front-end',
+      options: [
+        { name: 'Vue' },
+        { name: 'Angular' },
+        { name: 'React' }
+      ]
+    }
+
+    const response = await request(app)
+      .post('/surveys')
+      .send(body)
+
+    expect(response.status).toBe(400)
+  })
 })

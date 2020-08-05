@@ -5,6 +5,9 @@ class SurveyController {
     if (!req.body.title) {
       return res.status(400).json({ error: 'field title is required' })
     }
+    if (!req.body.description) {
+      return res.status(400).json({ error: 'field description is required' })
+    }
     try {
       const survey = await Survey.create(req.body)
       return res.json({ survey })
