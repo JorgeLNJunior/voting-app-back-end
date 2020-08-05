@@ -6,7 +6,7 @@ describe('Survey', () => {
   beforeEach(async () => await dbUtil.cleanTables())
   afterAll(async () => await dbUtil.destroyConnection())
 
-  it('Should return 200 if vote is added', async () => {
+  it('Should return 200 if survey is created', async () => {
     const body = {
       title: 'Framework front-end',
       description: 'preferência de framework front-end',
