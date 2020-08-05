@@ -23,4 +23,22 @@ describe('Survey', () => {
 
     expect(response.status).toBe(200)
   })
+
+  it('Should return a object with created survey', async () => {
+    const body = {
+      title: 'Framework front-end',
+      description: 'preferência de framework front-end',
+      options: [
+        { name: 'Vue' },
+        { name: 'Angular' },
+        { name: 'React' }
+      ]
+    }
+
+    const response = await request(app)
+      .post('/surveys')
+      .send(body)
+
+    expect(response.body).toHaveProperty('survey')
+  })
 })
