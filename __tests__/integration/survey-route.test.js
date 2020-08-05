@@ -41,4 +41,21 @@ describe('Survey', () => {
 
     expect(response.body).toHaveProperty('survey')
   })
+
+  it('Should return 400 if title is not provided', async () => {
+    const body = {
+      description: 'preferência de framework front-end',
+      options: [
+        { name: 'Vue' },
+        { name: 'Angular' },
+        { name: 'React' }
+      ]
+    }
+
+    const response = await request(app)
+      .post('/surveys')
+      .send(body)
+
+    expect(response.status).toBe(400)
+  })
 })
