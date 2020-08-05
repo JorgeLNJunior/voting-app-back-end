@@ -1,7 +1,6 @@
 const router = require('express').Router()
+const SurveyController = require('./app/controllers/SurveyController')
 
-router.get('/', (req, res) => {
-  return res.json({ message: 'hello world' })
-})
+router.post('/surveys', SurveyController.create)
 
 module.exports = router
