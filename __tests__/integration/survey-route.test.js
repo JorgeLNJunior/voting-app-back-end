@@ -102,4 +102,18 @@ describe('Survey', () => {
 
     expect(response.status).toBe(400)
   })
+
+  it('Should return 400 if option name is empty', async () => {
+    const body = {
+      title: 'Framework front-end',
+      description: 'preferência de framework front-end',
+      options: [{ name: '' }, { name: '' }]
+    }
+
+    const response = await request(app)
+      .post('/surveys')
+      .send(body)
+
+    expect(response.status).toBe(400)
+  })
 })
