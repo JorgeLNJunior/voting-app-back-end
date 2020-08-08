@@ -7,19 +7,22 @@ class Survey {
       description: data.description
     })
 
-    data.options.forEach(async option => {
+    await data.options.forEach(async option => {
       await knex('options').insert({ survey_id: surveyId, name: option.name })
     })
 
-    const survey = await knex('surveys').where({ id: surveyId })
+    const survey = await knex('surveys').where({ id: surveyId }).first()
     const options = await knex('options').where({ survey_id: surveyId })
-    survey[0].options = options
+    survey.options = options
 
-    return survey[0]
+    return survey
   }
 
   async getById (id) {
     const survey = await knex('surveys').where({ id }).first()
+    if (!survey) {
+      return undefined
+    }
     const options = await knex('options').where({ survey_id: id })
     survey.options = options
     return survey
