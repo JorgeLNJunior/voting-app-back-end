@@ -19,4 +19,11 @@ describe('Show survey route', () => {
 
     expect(response.body).toHaveProperty('survey')
   })
+
+  it('should 400 if survey not exists', async () => {
+    const response = await request(app)
+      .get('/surveys/' + 50)
+
+    expect(response.status).toBe(400)
+  })
 })

@@ -18,9 +18,12 @@ class SurveyController {
   async show (req, res) {
     try {
       const survey = await Survey.getById(req.params.id)
+      if (!survey) {
+        return res.status(400).json({ error: 'survey not found' })
+      }
       return res.json({ survey })
     } catch (error) {
-      return res.status(500).json({ error: 'interrnal error' })
+      return res.status(500).json({ error: 'internal error' })
     }
   }
 }
