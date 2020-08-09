@@ -8,6 +8,7 @@
     "dev": "nodemon src/server.js --ignore __tests__",
     "pretest": "NODE_ENV=test knex migrate:latest",
     "test": "NODE_ENV=test jest --runInBand",
+    "test:coverage": "npm run pretest && NODE_ENV=test jest --coverage --runInBand && npm run posttest",
     "posttest": "NODE_ENV=test knex migrate:rollback --all"
   },
   "standard": {
