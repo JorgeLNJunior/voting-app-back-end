@@ -23,4 +23,21 @@ describe('Vote add route', () => {
 
     expect(response.status).toBe(200)
   })
+
+  it('should return 400 if option does not exist', async () => {
+    const survey = await Survey.create({
+      title: 'Framework front-end',
+      description: 'preferência de framework front-end',
+      options: [
+        { name: 'Vue' },
+        { name: 'Angular' },
+        { name: 'React' }
+      ]
+    })
+
+    const response = await request(app)
+      .post('/surveys/' + survey.id + '/vote/' + 10)
+
+    expect(response.status).toBe(400)
+  })
 })

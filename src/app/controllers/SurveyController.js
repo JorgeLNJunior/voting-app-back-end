@@ -31,6 +31,9 @@ class SurveyController {
     try {
       const { surveyId, optionId } = req.params
       const survey = await Survey.addVote(surveyId, optionId)
+      if (!survey) {
+        return res.status(400).json({ error: 'the option does not exist' })
+      }
       return res.json(survey)
     } catch (error) {
       console.log(error)
