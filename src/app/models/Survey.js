@@ -27,6 +27,19 @@ class Survey {
     survey.options = options
     return survey
   }
+
+  async addVote (surveyID, optionID) {
+    var survey = await this.getById(surveyID)
+    const option = survey.options.find(option => option.id == optionID) // eslint-disable-line
+    if (!option) {
+      return undefined
+    }
+    await knex('options').update({ votes: option.votes + 1 }).where({ id: option.id })
+
+    survey = await this.getById(surveyID)
+
+    return survey
+  }
 }
 
 module.exports = new Survey()
