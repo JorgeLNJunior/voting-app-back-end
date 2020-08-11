@@ -26,6 +26,17 @@ class SurveyController {
       return res.status(500).json({ error: 'internal error' })
     }
   }
+
+  async addVote (req, res) {
+    try {
+      const { surveyId, optionId } = req.params
+      const survey = await Survey.addVote(surveyId, optionId)
+      return res.json(survey)
+    } catch (error) {
+      console.log(error)
+      return res.status(500).json({ error: 'internal error' })
+    }
+  }
 }
 
 module.exports = new SurveyController()
