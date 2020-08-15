@@ -14,7 +14,8 @@
   "standard": {
     "env": [
       "jest"
-    ]
+    ],
+    "ignore": ["/src/public"]
   },
   "repository": {
     "type": "git",

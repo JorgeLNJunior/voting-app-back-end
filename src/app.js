@@ -1,4 +1,5 @@
 const express = require('express')
+const path = require('path')
 require('dotenv').config()
 
 class AppController {
@@ -10,6 +11,7 @@ class AppController {
 
   middlewares () {
     this.express.use(express.json())
+    this.express.use(express.static(path.resolve(`${__dirname}/public`)))
   }
 
   routes () {
