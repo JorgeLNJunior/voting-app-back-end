@@ -7,15 +7,18 @@
     "start": "node src/server.js",
     "dev": "nodemon src/server.js --ignore __tests__",
     "pretest": "NODE_ENV=test knex migrate:latest",
-    "test": "NODE_ENV=test jest --runInBand",
-    "test:coverage": "npm run pretest && NODE_ENV=test jest --coverage --runInBand && npm run posttest",
+    "test": "NODE_ENV=test jest --runInBand --passWithNoTests",
+    "test:ci": "npm run test -- --coverage --silent",
+    "test:coveralls": "npm run test:ci && coveralls < __tests__/coverage/lcov.info",
     "posttest": "NODE_ENV=test knex migrate:rollback --all"
   },
   "standard": {
     "env": [
       "jest"
     ],
-    "ignore": ["/src/public"]
+    "ignore": [
+      "/src/public"
+    ]
   },
   "repository": {
     "type": "git",
@@ -36,6 +39,7 @@
   },
   "devDependencies": {
     "@types/jest": "^26.0.8",
+    "coveralls": "^3.1.0",
     "husky": "^4.2.5",
     "jest": "^26.2.2",
     "lint-staged": "^10.2.11",
