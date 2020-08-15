@@ -36,7 +36,6 @@ class SurveyController {
       }
       return res.json(survey)
     } catch (error) {
-      console.log(error)
       return res.status(500).json({ error: 'internal error' })
     }
   }
