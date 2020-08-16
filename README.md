@@ -1,6 +1,5 @@
 <div align="center">
   <h1>Voting APP</h1>
-  <img src=""></img>
 </div>
 
 <div align="center">
