@@ -10,7 +10,7 @@ updates:
     schedule:
       interval: "weekly"
       day: "sunday"
-      time: "6:00"
+      time: "06:00"
       timezone: "America/Sao_Paulo"
     target-branch: "develop"
     versioning-strategy: increase-if-necessary
