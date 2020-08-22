@@ -23,7 +23,7 @@ module.exports = {
       host: process.env.DB_HOST || '127.0.0.1',
       database: process.env.DB_NAME || 'voting_app',
       user: process.env.DB_USER || 'root',
-      password: process.env.DB_PASSOWRD || 'root'
+      password: process.env.DB_PASSWORD || 'root'
     },
     migrations: {
       tableName: 'knex_migrations',
@@ -40,7 +40,7 @@ module.exports = {
       host: process.env.DB_HOST || '127.0.0.1',
       database: process.env.DB_NAME || 'voting_app',
       user: process.env.DB_USER || 'root',
-      password: process.env.DB_PASSOWRD || 'root'
+      password: process.env.DB_PASSWORD || 'root'
     },
     migrations: {
       tableName: 'knex_migrations',
