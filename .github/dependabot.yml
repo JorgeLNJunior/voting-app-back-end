@@ -14,4 +14,3 @@ updates:
       timezone: "America/Sao_Paulo"
     target-branch: "develop"
     versioning-strategy: increase-if-necessary
-    open-pull-requests-limit: 0
