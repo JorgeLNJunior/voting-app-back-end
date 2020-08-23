@@ -15,11 +15,13 @@ class AppController {
     this.express.use(express.json())
     this.express.use(express.static(path.resolve(`${__dirname}/public`)))
     this.express.use(cors())
-    this.express.use(morgan(
-      { connectionString: process.env.MONGO_CONNECTION_STRING },
-      {},
-      'combined'
-    ))
+    if (process.env.NODE_ENV !== 'test') {
+      this.express.use(morgan(
+        { connectionString: process.env.MONGO_CONNECTION_STRING },
+        {},
+        'combined'
+      ))
+    }
   }
 
   routes () {
