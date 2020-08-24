@@ -3,9 +3,10 @@ const validator = require('../validators/SurveyValidator')
 
 class SurveyController {
   async create (req, res) {
-    const validation = validator.validateCreate(req.body)
-    if (!validation.pass) {
-      return res.status(400).json({ errors: validation.errors })
+    try {
+      validator.validateCreate(req.body)
+    } catch (error) {
+      return res.status(error.statusCode).json({ error: error.message })
     }
     try {
       const survey = await Survey.create(req.body)

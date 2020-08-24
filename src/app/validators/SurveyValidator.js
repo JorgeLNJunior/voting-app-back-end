@@ -1,28 +1,24 @@
+const EmptyFieldError = require('../errors/EmptyFieldError')
+
 class SurveyValidator {
   validateCreate (body) {
-    const errors = []
-
     if (!body.title) {
-      errors.push({ error: 'field title cannot be empty' })
+      throw new EmptyFieldError('title')
     }
 
     if (!body.description) {
-      errors.push({ error: 'field description cannot be empty' })
+      throw new EmptyFieldError('description')
     }
 
     if (!body.options || body.options.length <= 0) {
-      errors.push({ error: 'field options cannot be empty' })
+      throw new EmptyFieldError('options')
     } else {
-      body.options.forEach(option => {
+      for (var option of body.options) {
         if (!option.name) {
-          errors.push({ error: 'field option name cannot be empty' })
+          throw new EmptyFieldError('option name')
         }
-      })
+      }
     }
-
-    if (errors.length > 0) {
-      return { pass: false, errors: errors }
-    } else { return { pass: true, errors: [] } }
   }
 }
 
