@@ -26,4 +26,13 @@ describe('Show survey route', () => {
 
     expect(response.status).toBe(400)
   })
+
+  it('Should return 500 if an internal error has ocurred', async () => {
+    await dbUtil.destroyConnection() // force database error
+
+    const response = await request(app)
+      .get('/surveys/' + 1)
+
+    expect(response.status).toBe(500)
+  })
 })

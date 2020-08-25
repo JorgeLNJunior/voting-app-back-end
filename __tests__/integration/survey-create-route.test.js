@@ -116,4 +116,20 @@ describe('Survey', () => {
 
     expect(response.status).toBe(400)
   })
+
+  it('Should return 500 if an internal error has ocurred', async () => {
+    const body = {
+      title: 'Framework front-end',
+      description: 'preferência de framework front-end',
+      options: [{ name: 'option' }, { name: 'option2' }]
+    }
+
+    await dbUtil.destroyConnection() // force database error
+
+    const response = await request(app)
+      .post('/surveys')
+      .send(body)
+
+    expect(response.status).toBe(500)
+  })
 })
