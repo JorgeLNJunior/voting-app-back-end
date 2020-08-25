@@ -16,7 +16,7 @@ class AppController {
     this.express.use(express.static(path.resolve(`${__dirname}/public`)))
     this.express.use(cors())
     /* istanbul ignore next */
-    if (!process.env.NODE_ENV === 'test') {
+    if (process.env.NODE_ENV !== 'test') {
       this.express.use(morgan(
         { connectionString: process.env.MONGO_CONNECTION_STRING },
         {},
