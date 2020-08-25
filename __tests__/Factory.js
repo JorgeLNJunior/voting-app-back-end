@@ -1,8 +1,14 @@
 const faker = require('faker/locale/pt_BR')
+const Survey = require('../src/app/models/Survey')
 
 class Factory {
+  async createSurvey () {
+    const data = this.generateSurveyData()
+    const survey = await Survey.create(data)
+    return survey
+  }
+
   /**
-   *
    * @param {Object} overwrite a object with user data to overwrite (title, description or options)
    */
   generateSurveyData (overwrite) {
