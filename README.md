@@ -32,4 +32,3 @@ do repositório [app-ideas](https://github.com/florinpop17/app-ideas). Para a do
 
 - [x] Store items and votes in a database
 - [ ] Only allow authenticated users to vote
-
