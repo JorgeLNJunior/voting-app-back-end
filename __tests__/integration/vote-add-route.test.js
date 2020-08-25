@@ -1,6 +1,6 @@
 const request = require('supertest')
 const dbUtil = require('../utils/dbUtil')
-const Survey = require('../../src/app/models/Survey')
+const Factory = require('../Factory')
 const app = require('../../src/app')
 
 describe('Vote add route', () => {
@@ -8,15 +8,7 @@ describe('Vote add route', () => {
   afterAll(async () => await dbUtil.destroyConnection())
 
   it('should return 200 if vote is added', async () => {
-    const survey = await Survey.create({
-      title: 'Framework front-end',
-      description: 'preferência de framework front-end',
-      options: [
-        { name: 'Vue' },
-        { name: 'Angular' },
-        { name: 'React' }
-      ]
-    })
+    const survey = await Factory.createSurvey()
 
     const response = await request(app)
       .post('/surveys/' + survey.id + '/vote/' + survey.options[0].id)
@@ -25,19 +17,20 @@ describe('Vote add route', () => {
   })
 
   it('should return 400 if option does not exist', async () => {
-    const survey = await Survey.create({
-      title: 'Framework front-end',
-      description: 'preferência de framework front-end',
-      options: [
-        { name: 'Vue' },
-        { name: 'Angular' },
-        { name: 'React' }
-      ]
-    })
+    const survey = await Factory.createSurvey()
 
     const response = await request(app)
       .post('/surveys/' + survey.id + '/vote/' + 10)
 
     expect(response.status).toBe(400)
+  })
+
+  it('Should return 500 if an internal error has ocurred', async () => {
+    await dbUtil.destroyConnection() // force database error
+
+    const response = await request(app)
+      .post('/surveys/' + 1 + '/vote/' + 1)
+
+    expect(response.status).toBe(500)
   })
 })
