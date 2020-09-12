@@ -20,4 +20,18 @@ describe('register route', () => {
 
     expect(response.status).toBe(200)
   })
+
+  it('should return a object with user data', async () => {
+    const body = {
+      name: 'user',
+      email: 'user@mail.com',
+      password: '123456'
+    }
+
+    const response = await request(app)
+      .post('/register')
+      .send(body)
+
+    expect(response.body).toHaveProperty('user')
+  })
 })
