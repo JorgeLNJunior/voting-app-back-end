@@ -89,4 +89,16 @@ describe('register route', () => {
 
     expect(response.status).toBe(400)
   })
+
+  it('should return 500 if an internal error has ocurred', async () => {
+    const body = Factory.generateUserData()
+
+    await dbUtil.destroyConnection() // force database error
+
+    const response = await request(app)
+      .post('/register')
+      .send(body)
+
+    expect(response.status).toBe(500)
+  })
 })
