@@ -1,5 +1,6 @@
 const EmptyFieldError = require('../errors/EmptyFieldError')
 const EmailRegisteredError = require('../errors/EmailRegisteredError')
+const FieldLengthError = require('../errors/FieldLengthError')
 const User = require('../models/User')
 
 class UserValidator {
@@ -13,8 +14,10 @@ class UserValidator {
     if (!body.password) {
       throw new EmptyFieldError('password')
     }
+    if (body.password.length > 20) {
+      throw new FieldLengthError('password', 20)
+    }
     if (await User.getByEmail(body.email)) {
-      console.log('erro')
       throw new EmailRegisteredError()
     }
   }

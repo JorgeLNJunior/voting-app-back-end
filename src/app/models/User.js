@@ -18,7 +18,6 @@ class User {
 
   async getByEmail (email) {
     const user = await knex('users').where({ email }).first()
-    console.log(user)
     return user
   }
 }
