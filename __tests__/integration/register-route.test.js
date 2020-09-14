@@ -69,4 +69,14 @@ describe('register route', () => {
 
     expect(response.status).toBe(400)
   })
+
+  it('should return 400 if password length is greater than 20', async () => {
+    const body = Factory.generateUserData({ password: '000000000000000000000' })
+
+    const response = await request(app)
+      .post('/register')
+      .send(body)
+
+    expect(response.status).toBe(400)
+  })
 })
