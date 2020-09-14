@@ -79,4 +79,14 @@ describe('register route', () => {
 
     expect(response.status).toBe(400)
   })
+
+  it('should return 400 if email is invalid', async () => {
+    const body = Factory.generateUserData({ email: 'invalidMail' })
+
+    const response = await request(app)
+      .post('/register')
+      .send(body)
+
+    expect(response.status).toBe(400)
+  })
 })
