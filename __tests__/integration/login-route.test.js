@@ -18,4 +18,15 @@ describe('login route', () => {
 
     expect(response.status).toBe(200)
   })
+
+  it('should return a jwt token if user credentials are valid', async () => {
+    const data = Factory.generateUserData()
+    await User.create(data)
+
+    const response = await request(app)
+      .post('/login')
+      .send({ email: data.email, password: data.password })
+
+    expect(response.body).toHaveProperty('token')
+  })
 })
