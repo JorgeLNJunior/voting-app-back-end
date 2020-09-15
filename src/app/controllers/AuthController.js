@@ -1,5 +1,6 @@
 const User = require('../models/User')
 const UserValdator = require('../validators/UserValidator')
+const bcrypt = require('bcrypt')
 
 class AuthController {
   async register (req, res) {
@@ -13,6 +14,22 @@ class AuthController {
       return res.json({ user: user })
     } catch (error) {
       /* istanbul ignore next */
+      return res.status(500).json({ error: 'internal error' })
+    }
+  }
+
+  async login (req, res) {
+    const { email, password } = req.body
+    try {
+      const user = await User.getByEmail(email)
+      if (!user) {
+        return res.status(400).json({ error: 'unregistered email' })
+      }
+      if (!await bcrypt.compare(password, user.password)) {
+        return res.status(400).json({ error: 'invalid credentials ' })
+      }
+      return res.send()
+    } catch (error) {
       return res.status(500).json({ error: 'internal error' })
     }
   }
