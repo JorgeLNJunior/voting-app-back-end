@@ -4,3 +4,6 @@ node_js:
 script:
   - standard
   - npm run test:coveralls
+env:
+  - APP_SECRET=dhaowhuafawjfioa
+
