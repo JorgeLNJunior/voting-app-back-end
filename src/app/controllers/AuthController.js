@@ -15,6 +15,7 @@ class AuthController {
       const user = await User.create(req.body)
       return res.json({ user: user })
     } catch (error) {
+      console.log(error)
       /* istanbul ignore next */
       return res.status(500).json(error)
     }
@@ -36,6 +37,7 @@ class AuthController {
       }, process.env.APP_SECRET, { expiresIn: '5d' })
       return res.json({ token: token })
     } catch (error) {
+      console.log(error)
       return res.status(500).json(error)
     }
   }
