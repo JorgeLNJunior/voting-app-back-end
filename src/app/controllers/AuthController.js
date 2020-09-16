@@ -16,7 +16,7 @@ class AuthController {
       return res.json({ user: user })
     } catch (error) {
       /* istanbul ignore next */
-      return res.status(500).json({ error: 'inernal error' })
+      return res.status(500).json({ error: 'internal error' })
     }
   }
 
@@ -37,7 +37,7 @@ class AuthController {
       return res.json({ token: token })
     } catch (error) {
       /* istanbul ignore next */
-      return res.status(500).json({ error: 'inernal error' })
+      return res.status(500).json({ error: 'internal error' })
     }
   }
 }
