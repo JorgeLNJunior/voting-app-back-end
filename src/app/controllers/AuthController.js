@@ -1,8 +1,7 @@
 const User = require('../models/User')
 const UserValdator = require('../validators/UserValidator')
 const bcrypt = require('bcryptjs')
-const jwt = require('jsonwebtoken')
-const moment = require('moment')
+const AuthService = require('../services/AuthService')
 
 class AuthController {
   async register (req, res) {
@@ -30,10 +29,7 @@ class AuthController {
       if (!await bcrypt.compare(password, user.password)) {
         return res.status(400).json({ error: 'invalid credentials ' })
       }
-      const token = jwt.sign({
-        uid: user.id,
-        expiresIn: moment().add(5, 'days')
-      }, process.env.APP_SECRET || 'ex83l2zfDz', { expiresIn: '5d' })
+      const token = AuthService.generateToken(user.id)
       return res.json({ token: token })
     } catch (error) {
       /* istanbul ignore next */
