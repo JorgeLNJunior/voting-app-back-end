@@ -15,9 +15,8 @@ class AuthController {
       const user = await User.create(req.body)
       return res.json({ user: user })
     } catch (error) {
-      console.log(error)
       /* istanbul ignore next */
-      return res.status(500).json(error)
+      return res.status(500).json({ error: 'inernal error' })
     }
   }
 
@@ -34,11 +33,10 @@ class AuthController {
       const token = jwt.sign({
         uid: user.id,
         expiresIn: moment().add(5, 'days')
-      }, process.env.APP_SECRET, { expiresIn: '5d' })
+      }, process.env.APP_SECRET || 'ex83l2zfDz', { expiresIn: '5d' })
       return res.json({ token: token })
     } catch (error) {
-      console.log(error)
-      return res.status(500).json(error)
+      return res.status(500).json({ error: 'inernal error' })
     }
   }
 }
