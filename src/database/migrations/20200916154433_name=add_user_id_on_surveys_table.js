@@ -6,6 +6,7 @@ exports.up = function (knex) {
       .inTable('users')
       .unsigned()
       .notNullable()
+      .defaultTo(0)
       .onUpdate('CASCADE')
       .onDelete('CASCADE')
   })
