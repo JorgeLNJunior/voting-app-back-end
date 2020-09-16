@@ -36,6 +36,7 @@ class AuthController {
       }, process.env.APP_SECRET || 'ex83l2zfDz', { expiresIn: '5d' })
       return res.json({ token: token })
     } catch (error) {
+      /* istanbul ignore next */
       return res.status(500).json({ error: 'inernal error' })
     }
   }
