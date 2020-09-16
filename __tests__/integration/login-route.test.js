@@ -29,4 +29,26 @@ describe('login route', () => {
 
     expect(response.body).toHaveProperty('token')
   })
+
+  it('should return 400 if email is unregistered', async () => {
+    const data = Factory.generateUserData()
+    await User.create(data)
+
+    const response = await request(app)
+      .post('/login')
+      .send({ email: 'unregistered@mail.com', password: data.password })
+
+    expect(response.status).toBe(400)
+  })
+
+  it('should return 400 if password is invalid', async () => {
+    const data = Factory.generateUserData()
+    await User.create(data)
+
+    const response = await request(app)
+      .post('/login')
+      .send({ email: data.email, password: 'invalid-password' })
+
+    expect(response.status).toBe(400)
+  })
 })
