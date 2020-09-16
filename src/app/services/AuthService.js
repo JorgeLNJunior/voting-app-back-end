@@ -3,6 +3,7 @@ const moment = require('moment')
 
 class AuthService {
   generateToken (userID) {
+    /* istanbul ignore next */
     return jwt.sign({
       uid: userID,
       expiresIn: moment().add(5, 'days')
