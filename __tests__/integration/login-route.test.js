@@ -16,6 +16,8 @@ describe('login route', () => {
       .post('/login')
       .send({ email: data.email, password: data.password })
 
+    console.log(response.body)
+
     expect(response.status).toBe(200)
   })
 
@@ -26,6 +28,8 @@ describe('login route', () => {
     const response = await request(app)
       .post('/login')
       .send({ email: data.email, password: data.password })
+
+    console.log(response.body)
 
     expect(response.body).toHaveProperty('token')
   })
