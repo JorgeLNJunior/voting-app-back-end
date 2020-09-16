@@ -16,7 +16,7 @@ class AuthController {
       return res.json({ user: user })
     } catch (error) {
       /* istanbul ignore next */
-      return res.status(500).json({ error: 'internal error' })
+      return res.status(500).json(error)
     }
   }
 
@@ -36,7 +36,7 @@ class AuthController {
       }, process.env.APP_SECRET, { expiresIn: '5d' })
       return res.json({ token: token })
     } catch (error) {
-      return res.status(500).json({ error: 'internal error' })
+      return res.status(500).json(error)
     }
   }
 }
