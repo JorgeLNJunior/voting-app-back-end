@@ -1,6 +1,6 @@
 const User = require('../models/User')
 const UserValdator = require('../validators/UserValidator')
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const moment = require('moment')
 
