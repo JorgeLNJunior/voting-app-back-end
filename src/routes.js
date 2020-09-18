@@ -15,6 +15,9 @@ router.post('/surveys/:surveyId/vote/:optionId', SurveyController.addVote)
 
 router.get('/users/:id', async (req, res) => {
   const user = await User.getByID(req.params.id)
+  if (!user) {
+    return res.status(400).json({ error: 'user not found' })
+  }
   return res.json({ user: user })
 })
 
