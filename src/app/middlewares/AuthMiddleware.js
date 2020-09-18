@@ -12,7 +12,7 @@ module.exports = async (req, res, next) => {
 
   try {
     const decoded = await promisify(jwt.verify)(token, process.env.APP_SECRET)
-    req.UID = decoded.UID
+    req.UID = decoded.uid
   } catch (error) {
     return res.status(401).json({ error: 'invalid token' })
   }
