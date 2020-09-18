@@ -16,6 +16,11 @@ class User {
     return user
   }
 
+  async getByID (id) {
+    const user = await knex('users').where({ id }).first()
+    return user
+  }
+
   async getByEmail (email) {
     const user = await knex('users').where({ email }).first()
     return user
