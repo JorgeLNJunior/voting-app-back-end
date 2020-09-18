@@ -39,6 +39,28 @@ describe('Vote add route', () => {
     expect(response.status).toBe(400)
   })
 
+  it('should return 401 if token is not provided', async () => {
+    const survey = await Factory.createSurvey()
+
+    const response = await request(app)
+      .post('/surveys/' + survey.id + '/vote/' + survey.options[0].id)
+      .set('Content-Type', 'application/json')
+
+    expect(response.status).toBe(401)
+  })
+
+  it('should return 401 if token is not valid', async () => {
+    const survey = await Factory.createSurvey()
+    const token = 'invalidtoken'
+
+    const response = await request(app)
+      .post('/surveys/' + survey.id + '/vote/' + survey.options[0].id)
+      .set('Authorization', `Bearer ${token}`)
+      .set('Content-Type', 'application/json')
+
+    expect(response.status).toBe(401)
+  })
+
   it('Should return 500 if an internal error has ocurred', async () => {
     const userData = Factory.generateUserData()
     const user = await User.create(userData)

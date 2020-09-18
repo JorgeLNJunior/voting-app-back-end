@@ -9,7 +9,7 @@ describe('Show survey route', () => {
   beforeEach(async () => await dbUtil.cleanTables())
   afterAll(async () => await dbUtil.destroyConnection())
 
-  it('should return a object with survey', async () => {
+  it('should return a object with the survey', async () => {
     const survey = await Factory.createSurvey()
 
     const userData = Factory.generateUserData()
@@ -24,7 +24,7 @@ describe('Show survey route', () => {
     expect(response.body).toHaveProperty('survey')
   })
 
-  it('should 400 if survey not exists', async () => {
+  it('should return 400 if survey does not exist', async () => {
     const userData = Factory.generateUserData()
     const user = await User.create(userData)
     const token = AuthService.generateToken(user.id)
@@ -37,7 +37,26 @@ describe('Show survey route', () => {
     expect(response.status).toBe(400)
   })
 
-  it('Should return 500 if an internal error has ocurred', async () => {
+  it('should return 401 if token is not provided', async () => {
+    const response = await request(app)
+      .get('/surveys/' + 50)
+      .set('Content-Type', 'application/json')
+
+    expect(response.status).toBe(401)
+  })
+
+  it('should return 401 if token is not valid', async () => {
+    const token = 'invalidtoken'
+
+    const response = await request(app)
+      .get('/surveys/' + 50)
+      .set('Authorization', `Bearer ${token}`)
+      .set('Content-Type', 'application/json')
+
+    expect(response.status).toBe(401)
+  })
+
+  it('should return 500 if an internal error has ocurred', async () => {
     const userData = Factory.generateUserData()
     const user = await User.create(userData)
     const token = AuthService.generateToken(user.id)
