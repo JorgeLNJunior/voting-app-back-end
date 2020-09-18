@@ -14,11 +14,15 @@ router.get('/surveys/:id', SurveyController.show)
 router.post('/surveys/:surveyId/vote/:optionId', SurveyController.addVote)
 
 router.get('/users/:id', async (req, res) => {
-  const user = await User.getByID(req.params.id)
-  if (!user) {
-    return res.status(400).json({ error: 'user not found' })
+  try {
+    const user = await User.getByID(req.params.id)
+    if (!user) {
+      return res.status(400).json({ error: 'user not found' })
+    }
+    return res.json({ user: user })
+  } catch (error) {
+    return res.status(500).json({ error: 'internal error' })
   }
-  return res.json({ user: user })
 })
 
 module.exports = router

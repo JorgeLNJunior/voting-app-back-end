@@ -43,4 +43,18 @@ describe('show user route', () => {
 
     expect(response.status).toBe(400)
   })
+
+  it('should return 500 if an internal error has ocurred', async () => {
+    const user = await Factory.createUser()
+    const token = AuthService.generateToken(user.id)
+
+    await dbUtil.destroyConnection() // force database error
+
+    const response = await request(app)
+      .get('/users/300')
+      .set('Content-Type', 'application/json')
+      .set('Authorization', `Bearer ${token}`)
+
+    expect(response.status).toBe(500)
+  })
 })
