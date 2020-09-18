@@ -1,11 +1,18 @@
 const faker = require('faker/locale/pt_BR')
 const Survey = require('../src/app/models/Survey')
+const User = require('../src/app/models/User')
 
 class Factory {
   async createSurvey () {
     const data = this.generateSurveyData()
     const survey = await Survey.create(data)
     return survey
+  }
+
+  async createUser (overwrite) {
+    const data = this.generateUserData(overwrite)
+    const user = await User.create(data)
+    return user
   }
 
   /**
