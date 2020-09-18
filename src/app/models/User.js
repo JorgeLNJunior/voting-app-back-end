@@ -25,6 +25,12 @@ class User {
     const user = await knex('users').where({ email }).first()
     return user
   }
+
+  async update (id, data) {
+    const uid = await knex('users').update(data).where({ id })
+    const user = await knex('users').where({ id: uid }).first()
+    return user
+  }
 }
 
 module.exports = new User()
