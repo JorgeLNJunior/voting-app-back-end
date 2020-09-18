@@ -19,4 +19,16 @@ describe('show user route', () => {
 
     expect(response.status).toBe(200)
   })
+
+  it('should return user data', async () => {
+    const user = await Factory.createUser()
+    const token = AuthService.generateToken(user.id)
+
+    const response = await request(app)
+      .get(`/users/${user.id}`)
+      .set('Content-Type', 'application/json')
+      .set('Authorization', `Bearer ${token}`)
+
+    expect(response.body).toHaveProperty('user')
+  })
 })
