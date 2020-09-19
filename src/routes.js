@@ -16,8 +16,23 @@ router.post('/surveys/:surveyId/vote/:optionId', SurveyController.addVote)
 
 router.get('/users/:id', UserController.getByID)
 router.put('/users/:id', async (req, res) => {
-  const user = await User.update(req.UID, { name: 'new name' })
-  return res.json({ user: user })
+  const { name, password } = req.body
+  if (!name || !password) {
+    return res.status(400).json({ error: 'invalid params' })
+  }
+  const data = {}
+  if (name) {
+    data.name = name
+  }
+  if (password) {
+    data.password = password
+  }
+  try {
+    const user = await User.update(req.UID, data)
+    return res.json({ user: user })
+  } catch (error) {
+    return res.status(500).json({ error: 'internal error' })
+  }
 })
 
 module.exports = router
