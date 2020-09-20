@@ -1,7 +1,9 @@
-const EmptyFieldError = require('../errors/EmptyFieldError')
-const EmailRegisteredError = require('../errors/EmailRegisteredError')
-const FieldLengthError = require('../errors/FieldLengthError')
-const InvalidEmailError = require('../errors/InvalidEmailError')
+const {
+  EmptyFieldError,
+  EmailRegisteredError,
+  FieldLengthError,
+  InvalidEmailError
+} = require('../helpers/Errors')
 const User = require('../models/User')
 
 class UserValidator {
@@ -9,22 +11,22 @@ class UserValidator {
     const EMAIL_REGEX = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i
 
     if (!body.name) {
-      throw new EmptyFieldError('name')
+      throw new EmptyFieldError('field name is required')
     }
     if (!body.email) {
-      throw new EmptyFieldError('email')
+      throw new EmptyFieldError('field email is required')
     }
     if (!body.password) {
-      throw new EmptyFieldError('password')
+      throw new EmptyFieldError('field password is required')
     }
     if (body.password.length > 20) {
-      throw new FieldLengthError('password', 20)
+      throw new FieldLengthError('password field length must not be greater than 20')
     }
     if (await User.getByEmail(body.email)) {
-      throw new EmailRegisteredError()
+      throw new EmailRegisteredError('this email is already registered')
     }
     if (!EMAIL_REGEX.test(body.email.toLowerCase())) {
-      throw new InvalidEmailError()
+      throw new InvalidEmailError('invalid email')
     }
   }
 }

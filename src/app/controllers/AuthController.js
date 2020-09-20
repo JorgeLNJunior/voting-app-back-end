@@ -4,18 +4,13 @@ const bcrypt = require('bcryptjs')
 const AuthService = require('../services/AuthService')
 
 class AuthController {
-  async register (req, res) {
+  async register (req, res, next) {
     try {
       await UserValdator.validateRegister(req.body)
-    } catch (error) {
-      return res.status(error.statusCode || 500).json({ error: error.message || 'internal error' })
-    }
-    try {
       const user = await User.create(req.body)
       return res.json({ user: user })
     } catch (error) {
-      /* istanbul ignore next */
-      return res.status(500).json({ error: 'internal error' })
+      next(error)
     }
   }
 
