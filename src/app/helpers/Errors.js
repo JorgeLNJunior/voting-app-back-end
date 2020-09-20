@@ -17,11 +17,11 @@ class GeneralError extends Error {
     if (this instanceof InvalidEmailError) {
       return 400
     }
-    if (this instanceof UnauthenticatedError) {
-      return 401
+    if (this instanceof UnregisteredEmailError) {
+      return 400
     }
-    if (this instanceof InvalidTokenError) {
-      return 401
+    if (this instanceof InvalidCredentialError) {
+      return 400
     }
     return 500
   }
@@ -31,8 +31,8 @@ class EmailRegisteredError extends GeneralError { }
 class EmptyFieldError extends GeneralError { }
 class FieldLengthError extends GeneralError { }
 class InvalidEmailError extends GeneralError { }
-class UnauthenticatedError extends GeneralError { }
-class InvalidTokenError extends GeneralError { }
+class UnregisteredEmailError extends GeneralError { }
+class InvalidCredentialError extends GeneralError { }
 
 module.exports = {
   GeneralError,
@@ -40,6 +40,6 @@ module.exports = {
   EmptyFieldError,
   FieldLengthError,
   InvalidEmailError,
-  UnauthenticatedError,
-  InvalidTokenError
+  UnregisteredEmailError,
+  InvalidCredentialError
 }
