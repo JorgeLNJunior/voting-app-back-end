@@ -26,6 +26,7 @@ class GeneralError extends Error {
     if (this instanceof ResourceNotFoundError) {
       return 400
     }
+    /* istanbul ignore next */
     return 500
   }
 }
