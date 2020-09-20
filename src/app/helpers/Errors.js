@@ -23,6 +23,9 @@ class GeneralError extends Error {
     if (this instanceof InvalidCredentialError) {
       return 400
     }
+    if (this instanceof ResourceNotFoundError) {
+      return 400
+    }
     return 500
   }
 }
@@ -33,6 +36,7 @@ class FieldLengthError extends GeneralError { }
 class InvalidEmailError extends GeneralError { }
 class UnregisteredEmailError extends GeneralError { }
 class InvalidCredentialError extends GeneralError { }
+class ResourceNotFoundError extends GeneralError { }
 
 module.exports = {
   GeneralError,
@@ -41,5 +45,6 @@ module.exports = {
   FieldLengthError,
   InvalidEmailError,
   UnregisteredEmailError,
-  InvalidCredentialError
+  InvalidCredentialError,
+  ResourceNotFoundError
 }
