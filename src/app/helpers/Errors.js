@@ -8,10 +8,10 @@ class GeneralError extends Error {
     if (this instanceof EmailRegisteredError) {
       return 400
     }
-    if (this instanceof EmptyFiledError) {
+    if (this instanceof EmptyFieldError) {
       return 400
     }
-    if (this instanceof FiedlLengthError) {
+    if (this instanceof FieldLengthError) {
       return 400
     }
     if (this instanceof InvalidEmailError) {
@@ -28,8 +28,8 @@ class GeneralError extends Error {
 }
 
 class EmailRegisteredError extends GeneralError { }
-class EmptyFiledError extends GeneralError { }
-class FiedlLengthError extends GeneralError { }
+class EmptyFieldError extends GeneralError { }
+class FieldLengthError extends GeneralError { }
 class InvalidEmailError extends GeneralError { }
 class UnauthenticatedError extends GeneralError { }
 class InvalidTokenError extends GeneralError { }
@@ -37,8 +37,8 @@ class InvalidTokenError extends GeneralError { }
 module.exports = {
   GeneralError,
   EmailRegisteredError,
-  EmptyFiledError,
-  FiedlLengthError,
+  EmptyFieldError,
+  FieldLengthError,
   InvalidEmailError,
   UnauthenticatedError,
   InvalidTokenError
