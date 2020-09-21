@@ -62,4 +62,6 @@ describe('update user route', () => {
 
     expect(response.status).toBe(403)
   })
+
+  // criar teste para usuário inexistente
 })
