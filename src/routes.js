@@ -15,5 +15,8 @@ router.post('/surveys/:surveyId/vote/:optionId', SurveyController.addVote)
 
 router.get('/users/:id', UserController.getByID)
 router.put('/users/:id', UserController.edit)
+router.delete('/users/:id', (req, res, next) => {
+  return res.send()
+})
 
 module.exports = router

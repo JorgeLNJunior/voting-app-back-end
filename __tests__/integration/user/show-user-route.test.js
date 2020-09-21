@@ -8,7 +8,7 @@ describe('show user route', () => {
   beforeEach(async () => await dbUtil.cleanTables())
   afterAll(async () => await dbUtil.destroyConnection())
 
-  it('should 200 if user exists', async () => {
+  it('should return 200 if user exists', async () => {
     const user = await Factory.createUser()
     const token = AuthService.generateToken(user.id)
 
