@@ -36,7 +36,7 @@ describe('update user route', () => {
     expect(response.body).toHaveProperty('user')
   })
 
-  it('should return 400 if name or password is not provided', async () => {
+  it('should return 400 if name and password is not provided', async () => {
     const user = await Factory.createUser()
     const token = AuthService.generateToken(user.id)
 
@@ -47,5 +47,19 @@ describe('update user route', () => {
       .send({})
 
     expect(response.status).toBe(400)
+  })
+
+  it('should return 403 if id in the token is different from id sent', async () => {
+    const user = await Factory.createUser()
+    const token = AuthService.generateToken(user.id)
+    const data = Factory.generateUserData()
+
+    const response = await request(app)
+      .put('/users/200')
+      .set('Content-Type', 'application/json')
+      .set('Authorization', `Bearer ${token}`)
+      .send({ name: data.name })
+
+    expect(response.status).toBe(403)
   })
 })

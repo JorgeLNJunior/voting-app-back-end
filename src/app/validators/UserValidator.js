@@ -2,7 +2,8 @@ const {
   EmptyFieldError,
   EmailRegisteredError,
   FieldLengthError,
-  InvalidEmailError
+  InvalidEmailError,
+  UnauthorizedError
 } = require('../helpers/Errors')
 const User = require('../models/User')
 
@@ -27,6 +28,17 @@ class UserValidator {
     }
     if (!EMAIL_REGEX.test(body.email.toLowerCase())) {
       throw new InvalidEmailError('invalid email')
+    }
+  }
+
+  validateEdit (body, id, tokenId) {
+    const { name, password } = body
+    if (!name && !password) {
+      throw new EmptyFieldError('name or password is required')
+    }
+    // eslint-disable-next-line
+    if (tokenId != id) {
+      throw new UnauthorizedError('unauthorized')
     }
   }
 }

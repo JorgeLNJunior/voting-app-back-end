@@ -1,5 +1,6 @@
 const User = require('../models/User')
-const { ResourceNotFoundError, EmptyFieldError } = require('../helpers/Errors')
+const UserValidator = require('../validators/UserValidator')
+const { ResourceNotFoundError } = require('../helpers/Errors')
 
 class UserController {
   async getByID (req, res, next) {
@@ -16,10 +17,9 @@ class UserController {
 
   async edit (req, res, next) {
     const { name, password } = req.body
+    const { id } = req.params
     try {
-      if (!name || !password) {
-        throw new EmptyFieldError('name or password is required')
-      }
+      UserValidator.validateEdit(req.body, id, req.UID)
       const data = {}
       if (name) {
         data.name = name
@@ -27,7 +27,7 @@ class UserController {
       if (password) {
         data.password = password
       }
-      const user = await User.update(req.UID, data)
+      const user = await User.update(id, data)
       return res.json({ user: user })
     } catch (error) {
       next(error)

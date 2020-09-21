@@ -26,6 +26,9 @@ class GeneralError extends Error {
     if (this instanceof ResourceNotFoundError) {
       return 400
     }
+    if (this instanceof UnauthorizedError) {
+      return 403
+    }
     /* istanbul ignore next */
     return 500
   }
@@ -38,6 +41,7 @@ class InvalidEmailError extends GeneralError { }
 class UnregisteredEmailError extends GeneralError { }
 class InvalidCredentialError extends GeneralError { }
 class ResourceNotFoundError extends GeneralError { }
+class UnauthorizedError extends GeneralError { }
 
 module.exports = {
   GeneralError,
@@ -47,5 +51,6 @@ module.exports = {
   InvalidEmailError,
   UnregisteredEmailError,
   InvalidCredentialError,
-  ResourceNotFoundError
+  ResourceNotFoundError,
+  UnauthorizedError
 }
