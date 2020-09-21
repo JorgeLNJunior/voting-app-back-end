@@ -31,6 +31,11 @@ class User {
     const user = await knex('users').where({ id: uid }).first()
     return user
   }
+
+  async delete (id) {
+    const data = await knex('users').delete().where({ id })
+    return data
+  }
 }
 
 module.exports = new User()
