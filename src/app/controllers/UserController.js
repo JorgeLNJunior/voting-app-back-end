@@ -1,6 +1,6 @@
 const User = require('../models/User')
 const UserValidator = require('../validators/UserValidator')
-const { ResourceNotFoundError } = require('../helpers/Errors')
+const { ResourceNotFoundError, UnauthorizedError } = require('../helpers/Errors')
 
 class UserController {
   async getByID (req, res, next) {
@@ -31,6 +31,23 @@ class UserController {
       }
       const user = await User.update(id, data)
       return res.json({ user: user })
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  async delete (req, res, next) {
+    const { id } = req.params
+    try {
+      if (!await User.getByID(id)) {
+        throw new ResourceNotFoundError('user not found')
+      }
+      // eslint-disable-next-line
+      if (req.UID != id) {
+        throw new UnauthorizedError('unauthorized')
+      }
+      await User.delete(id)
+      return res.json({ message: 'user has been deleted' })
     } catch (error) {
       next(error)
     }
