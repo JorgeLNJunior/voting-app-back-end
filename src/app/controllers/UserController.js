@@ -21,9 +21,11 @@ class UserController {
     try {
       UserValidator.validateEdit(req.body, id, req.UID)
       const data = {}
+      /* istanbul ignore next */
       if (name) {
         data.name = name
       }
+      /* istanbul ignore next */
       if (password) {
         data.password = password
       }
