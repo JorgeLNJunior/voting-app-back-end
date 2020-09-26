@@ -19,6 +19,9 @@ class UserController {
     const { name, password } = req.body
     const { id } = req.params
     try {
+      if (!await User.getByID(id)) {
+        throw new ResourceNotFoundError('user not found')
+      }
       UserValidator.validateEdit(req.body, id, req.UID)
       const data = {}
       /* istanbul ignore next */

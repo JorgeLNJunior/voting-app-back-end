@@ -51,11 +51,12 @@ describe('update user route', () => {
 
   it('should return 403 if id in the token is different from id sent', async () => {
     const user = await Factory.createUser()
+    const user2 = await Factory.createUser()
     const token = AuthService.generateToken(user.id)
     const data = Factory.generateUserData()
 
     const response = await request(app)
-      .put('/users/200')
+      .put(`/users/${user2.id}`)
       .set('Content-Type', 'application/json')
       .set('Authorization', `Bearer ${token}`)
       .send({ name: data.name })
@@ -63,5 +64,17 @@ describe('update user route', () => {
     expect(response.status).toBe(403)
   })
 
-  // criar teste para usuário inexistente
+  it('should return 400 if user does not exists', async () => {
+    const user = await Factory.createUser()
+    const data = Factory.generateUserData()
+    const token = AuthService.generateToken(user.id)
+
+    const response = await request(app)
+      .put('/users/200')
+      .set('Content-Type', 'application/json')
+      .set('Authorization', `Bearer ${token}`)
+      .send({ name: data.name })
+
+    expect(response.status).toBe(400)
+  })
 })
