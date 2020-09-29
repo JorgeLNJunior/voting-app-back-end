@@ -49,6 +49,20 @@ describe('update user route', () => {
     expect(response.status).toBe(400)
   })
 
+  it('should return 400 if user does not exists', async () => {
+    const user = await Factory.createUser()
+    const data = Factory.generateUserData()
+    const token = AuthService.generateToken(user.id)
+
+    const response = await request(app)
+      .put('/users/200')
+      .set('Content-Type', 'application/json')
+      .set('Authorization', `Bearer ${token}`)
+      .send({ name: data.name })
+
+    expect(response.status).toBe(400)
+  })
+
   it('should return 403 if id in the token is different from id sent', async () => {
     const user = await Factory.createUser()
     const user2 = await Factory.createUser()
@@ -64,17 +78,29 @@ describe('update user route', () => {
     expect(response.status).toBe(403)
   })
 
-  it('should return 400 if user does not exists', async () => {
+  it('should return 401 if token is not provided', async () => {
     const user = await Factory.createUser()
     const data = Factory.generateUserData()
-    const token = AuthService.generateToken(user.id)
 
     const response = await request(app)
-      .put('/users/200')
+      .put(`/users/${user.id}`)
+      .set('Content-Type', 'application/json')
+      .send({ name: data.name })
+
+    expect(response.status).toBe(401)
+  })
+
+  it('should return 401 if token is not valid', async () => {
+    const user = await Factory.createUser()
+    const data = Factory.generateUserData()
+    const token = 'invalidtoken'
+
+    const response = await request(app)
+      .put(`/users/${user.id}`)
       .set('Content-Type', 'application/json')
       .set('Authorization', `Bearer ${token}`)
       .send({ name: data.name })
 
-    expect(response.status).toBe(400)
+    expect(response.status).toBe(401)
   })
 })

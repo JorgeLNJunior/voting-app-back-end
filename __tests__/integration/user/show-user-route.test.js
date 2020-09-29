@@ -44,6 +44,28 @@ describe('show user route', () => {
     expect(response.status).toBe(400)
   })
 
+  it('should return 401 if token is not provided', async () => {
+    const user = await Factory.createUser()
+
+    const response = await request(app)
+      .get(`/users/${user.id}`)
+      .set('Content-Type', 'application/json')
+
+    expect(response.status).toBe(401)
+  })
+
+  it('should return 401 if token is not valid', async () => {
+    const user = await Factory.createUser()
+    const token = 'invalidToken'
+
+    const response = await request(app)
+      .get(`/users/${user.id}`)
+      .set('Content-Type', 'application/json')
+      .set('Authorization', `Bearer ${token}`)
+
+    expect(response.status).toBe(401)
+  })
+
   it('should return 500 if an internal error has ocurred', async () => {
     const user = await Factory.createUser()
     const token = AuthService.generateToken(user.id)
