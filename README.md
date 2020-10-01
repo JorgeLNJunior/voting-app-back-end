@@ -1,5 +1,5 @@
 <div align="center">
-  <h1>Voting APP</h1>
+  <img src="https://i.imgur.com/cldg8Ie.png"></img>
 </div>
 
 <div align="center">
@@ -11,16 +11,25 @@
 
 </div>
 
+<div align="center">
+
 Aplicação feita com base no [Voting App](https://github.com/florinpop17/app-ideas/blob/master/Projects/2-Intermediate/Voting-App.md)
-do repositório [app-ideas](https://github.com/florinpop17/app-ideas). Para a documentação e organização do projeto acesse o seu respectivo [quadro no trello](https://trello.com/b/YacYdWhy/voting-app)
+do repositório [app-ideas](https://github.com/florinpop17/app-ideas). Para mais informações acesse o seu respectivo [quadro no trello](https://trello.com/b/YacYdWhy/voting-app)
+
+</div>
 
 ## Rotas
-| Rota                             	| Descrição                    	|
-|----------------------------------	|------------------------------	|
-| /surveys                         	| cria uma survey              	|
-| /surveys/:surveyID               	| lista uma survey             	|
-| /suveys/:surveyID/vote/:optionID 	| vota em uma opção            	|
-| /docs                            	| acessa a documentação da API 	|
+| HTTP   | Rota                             | Descrição                    |
+|--------|----------------------------------|------------------------------|
+| POST   | /register                        | registra um novo usuário     |
+| POST   | /login                           | autentica um usuário         |
+| GET    | /users/:id                       | lista um usuário             |
+| PUT    | /users/:id                       | edita um usuário             |
+| DELETE | /users/:id                       | deleta um usuário            |
+| POST   | /surveys                         | cria uma survey              |
+| GET    | /surveys/:surveyID               | lista uma survey             |
+| POST   | /suveys/:surveyID/vote/:optionID | vota em uma opção            |
+| GET    | /docs                            | acessa a documentação da API |
 
 ## User Stories
 
@@ -31,5 +40,5 @@ do repositório [app-ideas](https://github.com/florinpop17/app-ideas). Para a do
 ## Bonus features
 
 - [x] Store items and votes in a database
-- [ ] Only allow authenticated users to vote
+- [x] Only allow authenticated users to vote
 

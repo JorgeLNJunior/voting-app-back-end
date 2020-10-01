@@ -2,32 +2,22 @@ const express = require('express')
 const path = require('path')
 const cors = require('cors')
 const morgan = require('mongoose-morgan')
+const errorHandler = require('./app/middlewares/ErrorHandler')
 require('dotenv').config()
 
-class AppController {
-  constructor () {
-    this.express = express()
-    this.middlewares = this.middlewares()
-    this.routes = this.routes()
-  }
+const app = express()
 
-  middlewares () {
-    this.express.use(express.json())
-    this.express.use(express.static(path.resolve(`${__dirname}/public`)))
-    this.express.use(cors())
-    /* istanbul ignore next */
-    if (process.env.NODE_ENV !== 'test') {
-      this.express.use(morgan(
-        { connectionString: process.env.MONGO_CONNECTION_STRING },
-        {},
-        'combined'
-      ))
-    }
-  }
-
-  routes () {
-    this.express.use(require('./routes'))
-  }
+app.use(express.json())
+app.use(express.static(path.resolve(`${__dirname}/public`)))
+app.use(cors())
+/* istanbul ignore next */
+if (process.env.NODE_ENV === 'production') {
+  app.use(morgan({ connectionString: process.env.MONGO_CONNECTION_STRING },
+    {},
+    'combined'
+  ))
 }
+app.use(require('./routes'))
+app.use(errorHandler)
 
-module.exports = new AppController().express
+module.exports = app
