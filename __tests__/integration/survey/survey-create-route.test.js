@@ -1,9 +1,9 @@
 const request = require('supertest')
-const app = require('../../src/app')
-const dbUtil = require('../utils/dbUtil')
-const Factory = require('../Factory')
-const User = require('../../src/app/models/User')
-const AuthService = require('../../src/app/services/AuthService')
+const app = require('../../../src/app')
+const dbUtil = require('../../utils/dbUtil')
+const Factory = require('../../Factory')
+const User = require('../../../src/app/models/User')
+const AuthService = require('../../../src/app/services/AuthService')
 
 describe('survey', () => {
   beforeEach(async () => await dbUtil.cleanTables())
