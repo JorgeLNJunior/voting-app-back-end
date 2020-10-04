@@ -38,4 +38,19 @@ describe('update survey', () => {
 
     expect(response.status).toBe(400)
   })
+
+  it('should return 400 if survey does not exist', async () => {
+    const data = Factory.generateSurveyData()
+
+    const user = await Factory.createUser()
+    const token = AuthService.generateToken(user.id)
+
+    const response = await request(app)
+      .put('/surveys/200')
+      .set('Content-Type', 'application/json')
+      .set('Authorization', `Bearer ${token}`)
+      .send({ title: data.title, desciption: data.desciption })
+
+    expect(response.status).toBe(400)
+  })
 })

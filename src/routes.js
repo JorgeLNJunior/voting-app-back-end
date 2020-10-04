@@ -5,7 +5,7 @@ const UserController = require('./app/controllers/UserController')
 const AuthMiddleware = require('./app/middlewares/AuthMiddleware')
 
 const Survey = require('./app/models/Survey')
-const { EmptyFieldError } = require('./app/helpers/Errors')
+const { ResourceNotFoundError, EmptyFieldError } = require('./app/helpers/Errors')
 
 router.post('/register', AuthController.register)
 router.post('/login', AuthController.login)
@@ -24,6 +24,9 @@ router.put('/surveys/:id', async (req, res, next) => {
 
     if (!title && !description) {
       throw new EmptyFieldError('title or description is required')
+    }
+    if (!survey) {
+      throw new ResourceNotFoundError('survey not found')
     }
 
     const newData = { }
