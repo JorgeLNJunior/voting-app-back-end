@@ -23,4 +23,19 @@ describe('update survey', () => {
 
     expect(response.status).toBe(200)
   })
+
+  it('should return 400 if title or description is not provided', async () => {
+    const survey = await Factory.createSurvey()
+
+    const user = await Factory.createUser()
+    const token = AuthService.generateToken(user.id)
+
+    const response = await request(app)
+      .put(`/surveys/${survey.id}`)
+      .set('Content-Type', 'application/json')
+      .set('Authorization', `Bearer ${token}`)
+      .send({ })
+
+    expect(response.status).toBe(400)
+  })
 })
