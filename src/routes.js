@@ -5,7 +5,7 @@ const UserController = require('./app/controllers/UserController')
 const AuthMiddleware = require('./app/middlewares/AuthMiddleware')
 
 const Survey = require('./app/models/Survey')
-const { ResourceNotFoundError, EmptyFieldError } = require('./app/helpers/Errors')
+const { ResourceNotFoundError, UnauthorizedError, EmptyFieldError } = require('./app/helpers/Errors')
 
 router.post('/register', AuthController.register)
 router.post('/login', AuthController.login)
@@ -27,6 +27,10 @@ router.put('/surveys/:id', async (req, res, next) => {
     }
     if (!survey) {
       throw new ResourceNotFoundError('survey not found')
+    }
+    // eslint-disable-next-line
+    if (survey.user_id != req.UID) {
+      throw new UnauthorizedError('you are not authorized to edit this resource')
     }
 
     const newData = { }
