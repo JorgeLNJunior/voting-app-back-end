@@ -2,7 +2,6 @@ const request = require('supertest')
 const Factory = require('../../Factory')
 const app = require('../../../src/app')
 const dbUtil = require('../../utils/dbUtil')
-const User = require('../../../src/app/models/User')
 const AuthService = require('../../../src/app/services/AuthService')
 
 describe('Show survey route', () => {
@@ -12,8 +11,7 @@ describe('Show survey route', () => {
   it('should return a object with the survey', async () => {
     const survey = await Factory.createSurvey()
 
-    const userData = Factory.generateUserData()
-    const user = await User.create(userData)
+    const user = await Factory.createUser()
     const token = AuthService.generateToken(user.id)
 
     const response = await request(app)
@@ -25,8 +23,7 @@ describe('Show survey route', () => {
   })
 
   it('should return 400 if survey does not exist', async () => {
-    const userData = Factory.generateUserData()
-    const user = await User.create(userData)
+    const user = await Factory.createUser()
     const token = AuthService.generateToken(user.id)
 
     const response = await request(app)
@@ -57,8 +54,7 @@ describe('Show survey route', () => {
   })
 
   it('should return 500 if an internal error has ocurred', async () => {
-    const userData = Factory.generateUserData()
-    const user = await User.create(userData)
+    const user = await Factory.createUser()
     const token = AuthService.generateToken(user.id)
 
     await dbUtil.destroyConnection() // force database error

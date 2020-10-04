@@ -2,7 +2,6 @@ const request = require('supertest')
 const dbUtil = require('../../utils/dbUtil')
 const Factory = require('../../Factory')
 const app = require('../../../src/app')
-const User = require('../../../src/app/models/User')
 const AuthService = require('../../../src/app/services/AuthService')
 
 describe('Vote add route', () => {
@@ -13,7 +12,7 @@ describe('Vote add route', () => {
     const survey = await Factory.createSurvey()
 
     const userData = Factory.generateUserData()
-    const user = await User.create(userData)
+    const user = await Factory.createUser(userData)
     const token = AuthService.generateToken(user.id)
 
     const response = await request(app)
@@ -28,7 +27,7 @@ describe('Vote add route', () => {
     const survey = await Factory.createSurvey()
 
     const userData = Factory.generateUserData()
-    const user = await User.create(userData)
+    const user = await Factory.createUser(userData)
     const token = AuthService.generateToken(user.id)
 
     const response = await request(app)
@@ -63,7 +62,7 @@ describe('Vote add route', () => {
 
   it('Should return 500 if an internal error has ocurred', async () => {
     const userData = Factory.generateUserData()
-    const user = await User.create(userData)
+    const user = await Factory.createUser(userData)
     const token = AuthService.generateToken(user.id)
 
     await dbUtil.destroyConnection() // force database error
