@@ -3,9 +3,9 @@ const Survey = require('../src/app/models/Survey')
 const User = require('../src/app/models/User')
 
 class Factory {
-  async createSurvey () {
+  async createSurvey (userId) {
     const data = this.generateSurveyData()
-    const survey = await Survey.create(data)
+    const survey = await Survey.create(data, userId)
     return survey
   }
 
@@ -24,8 +24,8 @@ class Factory {
       overwrite = {}
     }
     surveyData = {
-      title: overwrite.title || faker.lorem.sentence(4),
-      description: overwrite.description || faker.lorem.paragraph(2),
+      title: overwrite.title || faker.lorem.sentence(3),
+      description: overwrite.description || faker.lorem.paragraph(1),
       options: overwrite.options || [
         { name: faker.lorem.word() },
         { name: faker.lorem.word() },

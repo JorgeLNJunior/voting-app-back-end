@@ -10,9 +10,9 @@ describe('update survey', () => {
 
   it('should return 200 if survey has been updated', async () => {
     const data = Factory.generateSurveyData()
-    const survey = await Factory.createSurvey()
-
     const user = await Factory.createUser()
+    const survey = await Factory.createSurvey(user.id)
+
     const token = AuthService.generateToken(user.id)
 
     const response = await request(app)
@@ -25,9 +25,9 @@ describe('update survey', () => {
   })
 
   it('should return 400 if title or description is not provided', async () => {
-    const survey = await Factory.createSurvey()
-
     const user = await Factory.createUser()
+    const survey = await Factory.createSurvey(user.id)
+
     const token = AuthService.generateToken(user.id)
 
     const response = await request(app)

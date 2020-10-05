@@ -6,7 +6,7 @@ class SurveyController {
   async create (req, res, next) {
     try {
       validator.validateCreate(req.body)
-      const survey = await Survey.create(req.body)
+      const survey = await Survey.create(req.body, req.UID)
       return res.json({ survey })
     } catch (error) {
       next(error)

@@ -9,9 +9,9 @@ describe('Show survey route', () => {
   afterAll(async () => await dbUtil.destroyConnection())
 
   it('should return a object with the survey', async () => {
-    const survey = await Factory.createSurvey()
-
     const user = await Factory.createUser()
+    const survey = await Factory.createSurvey(user.id)
+
     const token = AuthService.generateToken(user.id)
 
     const response = await request(app)
@@ -55,12 +55,13 @@ describe('Show survey route', () => {
 
   it('should return 500 if an internal error has ocurred', async () => {
     const user = await Factory.createUser()
+    const survey = await Factory.createSurvey(user.id)
     const token = AuthService.generateToken(user.id)
 
     await dbUtil.destroyConnection() // force database error
 
     const response = await request(app)
-      .get('/surveys/' + 1)
+      .get('/surveys/' + survey.id)
       .set('Content-Type', 'application/json')
       .set('Authorization', `Bearer ${token}`)
 
