@@ -1,6 +1,10 @@
 language: node_js
 node_js:
   - 12
+services:
+  - mysql
+before_install:
+  - mysql -e 'CREATE DATABASE IF NOT EXISTS vtapptest;'
 script:
   - standard
   - npm run test:coveralls
