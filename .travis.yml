@@ -3,12 +3,8 @@ node_js:
   - 12
 services:
   - mysql
-sudo: true
-before_script:
-  - chmod +x ./travis/*
-  - ./travis/mysql-reset-root-password.sh
-  - ./travis/create-test-database.sh
-
+before_install:
+  - mysql -e 'CREATE DATABASE IF NOT EXISTS vtapptest;'
 script:
   - standard
   - npm run test:coveralls

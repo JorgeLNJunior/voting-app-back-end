@@ -8,7 +8,7 @@ module.exports = {
       host: process.env.DB_HOST_TEST || '0.0.0.0',
       database: process.env.DB_NAME_TEST || 'vtapptest',
       user: process.env.DB_USER_TEST || 'root',
-      password: process.env.DB_PASSWORD_TEST || 'root'
+      password: process.env.DB_PASSWORD_TEST || ''
     },
     migrations: {
       tableName: 'knex_migrations',
