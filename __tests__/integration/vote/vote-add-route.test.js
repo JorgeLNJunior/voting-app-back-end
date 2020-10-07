@@ -41,7 +41,7 @@ describe('Vote add route', () => {
     const survey = await Factory.createSurvey(user.id)
 
     const response = await request(app)
-      .post('/surveys/' + survey.id + '/vote/' + survey.options[0].id)
+      .post('/surveys/' + survey.id + '/vote/' + 1)
       .set('Content-Type', 'application/json')
 
     expect(response.status).toBe(401)
@@ -53,7 +53,7 @@ describe('Vote add route', () => {
     const token = 'invalidtoken'
 
     const response = await request(app)
-      .post('/surveys/' + survey.id + '/vote/' + survey.options[0].id)
+      .post('/surveys/' + survey.id + '/vote/' + 1)
       .set('Authorization', `Bearer ${token}`)
       .set('Content-Type', 'application/json')
 
