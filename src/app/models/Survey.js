@@ -42,7 +42,7 @@ class Survey {
     return survey
   }
 
-  async edit (id, data) {
+  async update (id, data) {
     await knex('surveys').update(data).where({ id })
     const survey = await knex('surveys').where({ id }).first
     return survey

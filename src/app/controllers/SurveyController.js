@@ -37,6 +37,31 @@ class SurveyController {
       next(error)
     }
   }
+
+  async update (req, res, next) {
+    const { id } = req.params
+    const { title, description } = req.body
+
+    try {
+      await validator.validateUpdate(req.body, id, req.UID)
+
+      const newData = {}
+      /* istanbul ignore next */
+      if (title) {
+        newData.title = title
+      }
+      /* istanbul ignore next */
+      if (description) {
+        newData.description = description
+      }
+
+      const survey = await Survey.update(id, newData)
+
+      return res.json({ survey: survey })
+    } catch (error) {
+      next(error)
+    }
+  }
 }
 
 module.exports = new SurveyController()
