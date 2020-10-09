@@ -47,6 +47,10 @@ class Survey {
     const survey = await knex('surveys').where({ id }).first
     return survey
   }
+
+  async delete (id) {
+    await knex('surveys').delete().where({ id })
+  }
 }
 
 module.exports = new Survey()
