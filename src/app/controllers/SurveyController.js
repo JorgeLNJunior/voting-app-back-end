@@ -62,6 +62,22 @@ class SurveyController {
       next(error)
     }
   }
+
+  async delete (req, res, next) {
+    const { id } = req.params
+
+    try {
+      const user = await Survey.getById(id)
+      if (!user) {
+        throw new ResourceNotFoundError('user not found')
+      }
+
+      await Survey.delete(id)
+      return res.json({ message: 'survey delete' })
+    } catch (error) {
+      next(error)
+    }
+  }
 }
 
 module.exports = new SurveyController()
