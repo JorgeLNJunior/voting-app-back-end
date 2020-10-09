@@ -21,4 +21,18 @@ describe('survey delete', () => {
 
     expect(response.status).toBe(200)
   })
+
+  it('should return 400 if survey does not exist', async () => {
+    const user = await Factory.createUser()
+    const token = AuthService.generateToken(user.id)
+
+    const ramdomNumber = Math.floor(Math.random() * 100)
+
+    const response = await request(app)
+      .delete(`/surveys/${ramdomNumber}`)
+      .set('Content-Type', 'application/json')
+      .set('Authorization', `Bearer ${token}`)
+
+    expect(response.status).toBe(400)
+  })
 })
