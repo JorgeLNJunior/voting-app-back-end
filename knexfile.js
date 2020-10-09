@@ -3,9 +3,12 @@ require('dotenv').config()
 module.exports = {
 
   test: {
-    client: 'sqlite3',
+    client: 'mysql',
     connection: {
-      filename: './__tests__/database.sqlite'
+      host: process.env.DB_HOST_TEST || '0.0.0.0',
+      database: process.env.DB_NAME_TEST || 'vtapptest',
+      user: process.env.DB_USER_TEST || 'root',
+      password: process.env.DB_PASSWORD_TEST || ''
     },
     migrations: {
       tableName: 'knex_migrations',
@@ -13,8 +16,7 @@ module.exports = {
     },
     seeds: {
       directory: `${__dirname}/src/database/seeds`
-    },
-    useNullAsDefault: true
+    }
   },
 
   development: {

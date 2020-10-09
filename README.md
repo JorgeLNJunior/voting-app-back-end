@@ -14,7 +14,7 @@
 <div align="center">
 
 Aplicação feita com base no [Voting App](https://github.com/florinpop17/app-ideas/blob/master/Projects/2-Intermediate/Voting-App.md)
-do repositório [app-ideas](https://github.com/florinpop17/app-ideas). Para mais informações acesse o seu respectivo [quadro no trello](https://trello.com/b/YacYdWhy/voting-app)
+do repositório [app-ideas](https://github.com/florinpop17/app-ideas). Para mais informações acesse o seu respectivo [quadro no trello](https://trello.com/b/YacYdWhy/voting-app).
 
 </div>
 
@@ -29,7 +29,15 @@ do repositório [app-ideas](https://github.com/florinpop17/app-ideas). Para mais
 | POST   | /surveys                         | cria uma survey              |
 | GET    | /surveys/:surveyID               | lista uma survey             |
 | POST   | /suveys/:surveyID/vote/:optionID | vota em uma opção            |
+| PUT    | /surveys/:surveyID               | edita uma survey             |
+| DELETE | /surveys/:surveyID               | deleta uma survey            |
 | GET    | /docs                            | acessa a documentação da API |
+
+## Tecnologias
+- A fazer
+
+## Instalação e configuração
+- A fazer
 
 ## User Stories
 

@@ -1,19 +1,17 @@
 const request = require('supertest')
-const Factory = require('../Factory')
-const app = require('../../src/app')
-const dbUtil = require('../utils/dbUtil')
-const User = require('../../src/app/models/User')
-const AuthService = require('../../src/app/services/AuthService')
+const Factory = require('../../Factory')
+const app = require('../../../src/app')
+const dbUtil = require('../../utils/dbUtil')
+const AuthService = require('../../../src/app/services/AuthService')
 
 describe('Show survey route', () => {
   beforeEach(async () => await dbUtil.cleanTables())
   afterAll(async () => await dbUtil.destroyConnection())
 
   it('should return a object with the survey', async () => {
-    const survey = await Factory.createSurvey()
+    const user = await Factory.createUser()
+    const survey = await Factory.createSurvey(user.id)
 
-    const userData = Factory.generateUserData()
-    const user = await User.create(userData)
     const token = AuthService.generateToken(user.id)
 
     const response = await request(app)
@@ -25,8 +23,7 @@ describe('Show survey route', () => {
   })
 
   it('should return 400 if survey does not exist', async () => {
-    const userData = Factory.generateUserData()
-    const user = await User.create(userData)
+    const user = await Factory.createUser()
     const token = AuthService.generateToken(user.id)
 
     const response = await request(app)
@@ -57,14 +54,14 @@ describe('Show survey route', () => {
   })
 
   it('should return 500 if an internal error has ocurred', async () => {
-    const userData = Factory.generateUserData()
-    const user = await User.create(userData)
+    const user = await Factory.createUser()
+    const survey = await Factory.createSurvey(user.id)
     const token = AuthService.generateToken(user.id)
 
     await dbUtil.destroyConnection() // force database error
 
     const response = await request(app)
-      .get('/surveys/' + 1)
+      .get('/surveys/' + survey.id)
       .set('Content-Type', 'application/json')
       .set('Authorization', `Bearer ${token}`)
 

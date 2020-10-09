@@ -1,4 +1,5 @@
-const { EmptyFieldError } = require('../helpers/Errors')
+const { EmptyFieldError, ResourceNotFoundError, UnauthorizedError } = require('../helpers/Errors')
+const Survey = require('../models/Survey')
 
 class SurveyValidator {
   validateCreate (body) {
@@ -18,6 +19,34 @@ class SurveyValidator {
           throw new EmptyFieldError('field option name is required')
         }
       }
+    }
+  }
+
+  async validateUpdate (body, surveyId, tokenId) {
+    const { title, description } = body
+    var survey = await Survey.getById(surveyId)
+
+    if (!survey) {
+      throw new ResourceNotFoundError('survey not found')
+    }
+    // eslint-disable-next-line
+    if (survey.user_id != tokenId) {
+      throw new UnauthorizedError('you are not authorized to edit this resource')
+    }
+    if (!title && !description) {
+      throw new EmptyFieldError('title or description is required')
+    }
+  }
+
+  async validateDelete (surveyId, tokenId) {
+    var survey = await Survey.getById(surveyId)
+
+    if (!survey) {
+      throw new ResourceNotFoundError('survey not found')
+    }
+    // eslint-disable-next-line
+    if (survey.user_id != tokenId) {
+      throw new UnauthorizedError('unauthorized')
     }
   }
 }

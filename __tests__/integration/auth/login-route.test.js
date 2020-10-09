@@ -1,8 +1,7 @@
 const request = require('supertest')
-const app = require('../../src/app')
-const dbUtil = require('../utils/dbUtil')
-const Factory = require('../Factory')
-const User = require('../../src/app/models/User')
+const app = require('../../../src/app')
+const dbUtil = require('../../utils/dbUtil')
+const Factory = require('../../Factory')
 
 describe('login route', () => {
   beforeEach(async () => await dbUtil.cleanTables())
@@ -10,7 +9,7 @@ describe('login route', () => {
 
   it('should return 200 if user credentials are valid', async () => {
     const data = Factory.generateUserData()
-    await User.create(data)
+    await Factory.createUser(data)
 
     const response = await request(app)
       .post('/login')
@@ -21,7 +20,7 @@ describe('login route', () => {
 
   it('should return a jwt token if user credentials are valid', async () => {
     const data = Factory.generateUserData()
-    await User.create(data)
+    await Factory.createUser(data)
 
     const response = await request(app)
       .post('/login')
@@ -32,7 +31,7 @@ describe('login route', () => {
 
   it('should return 400 if email is unregistered', async () => {
     const data = Factory.generateUserData()
-    await User.create(data)
+    await Factory.createUser(data)
 
     const response = await request(app)
       .post('/login')
@@ -43,7 +42,7 @@ describe('login route', () => {
 
   it('should return 400 if password is invalid', async () => {
     const data = Factory.generateUserData()
-    await User.create(data)
+    await Factory.createUser(data)
 
     const response = await request(app)
       .post('/login')

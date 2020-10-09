@@ -1,10 +1,11 @@
 const knex = require('../../database/index')
 
 class Survey {
-  async create (data) {
+  async create (data, userId) {
     const surveyId = await knex('surveys').insert({
       title: data.title,
-      description: data.description
+      description: data.description,
+      user_id: userId
     })
 
     await data.options.forEach(async option => {
@@ -39,6 +40,16 @@ class Survey {
     survey = await this.getById(surveyID)
 
     return survey
+  }
+
+  async update (id, data) {
+    await knex('surveys').update(data).where({ id })
+    const survey = await knex('surveys').where({ id }).first()
+    return survey
+  }
+
+  async delete (id) {
+    await knex('surveys').delete().where({ id })
   }
 }
 

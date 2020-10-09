@@ -1,19 +1,17 @@
 const request = require('supertest')
-const dbUtil = require('../utils/dbUtil')
-const Factory = require('../Factory')
-const app = require('../../src/app')
-const User = require('../../src/app/models/User')
-const AuthService = require('../../src/app/services/AuthService')
+const dbUtil = require('../../utils/dbUtil')
+const Factory = require('../../Factory')
+const app = require('../../../src/app')
+const AuthService = require('../../../src/app/services/AuthService')
 
 describe('Vote add route', () => {
   beforeEach(async () => await dbUtil.cleanTables())
   afterAll(async () => await dbUtil.destroyConnection())
 
   it('should return 200 if vote is added', async () => {
-    const survey = await Factory.createSurvey()
+    const user = await Factory.createUser()
+    const survey = await Factory.createSurvey(user.id)
 
-    const userData = Factory.generateUserData()
-    const user = await User.create(userData)
     const token = AuthService.generateToken(user.id)
 
     const response = await request(app)
@@ -25,10 +23,9 @@ describe('Vote add route', () => {
   })
 
   it('should return 400 if option does not exist', async () => {
-    const survey = await Factory.createSurvey()
+    const user = await Factory.createUser()
+    const survey = await Factory.createSurvey(user.id)
 
-    const userData = Factory.generateUserData()
-    const user = await User.create(userData)
     const token = AuthService.generateToken(user.id)
 
     const response = await request(app)
@@ -40,21 +37,23 @@ describe('Vote add route', () => {
   })
 
   it('should return 401 if token is not provided', async () => {
-    const survey = await Factory.createSurvey()
+    const user = await Factory.createUser()
+    const survey = await Factory.createSurvey(user.id)
 
     const response = await request(app)
-      .post('/surveys/' + survey.id + '/vote/' + survey.options[0].id)
+      .post('/surveys/' + survey.id + '/vote/' + 1)
       .set('Content-Type', 'application/json')
 
     expect(response.status).toBe(401)
   })
 
   it('should return 401 if token is not valid', async () => {
-    const survey = await Factory.createSurvey()
+    const user = await Factory.createUser()
+    const survey = await Factory.createSurvey(user.id)
     const token = 'invalidtoken'
 
     const response = await request(app)
-      .post('/surveys/' + survey.id + '/vote/' + survey.options[0].id)
+      .post('/surveys/' + survey.id + '/vote/' + 1)
       .set('Authorization', `Bearer ${token}`)
       .set('Content-Type', 'application/json')
 
@@ -62,14 +61,14 @@ describe('Vote add route', () => {
   })
 
   it('Should return 500 if an internal error has ocurred', async () => {
-    const userData = Factory.generateUserData()
-    const user = await User.create(userData)
+    const user = await Factory.createUser()
+    const survey = await Factory.createSurvey(user.id)
     const token = AuthService.generateToken(user.id)
 
     await dbUtil.destroyConnection() // force database error
 
     const response = await request(app)
-      .post('/surveys/' + 1 + '/vote/' + 1)
+      .post('/surveys/' + survey.id + '/vote/' + 1)
       .set('Content-Type', 'application/json')
       .set('Authorization', `Bearer ${token}`)
 

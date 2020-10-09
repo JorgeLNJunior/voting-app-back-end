@@ -12,6 +12,8 @@ router.use(AuthMiddleware)
 router.post('/surveys', SurveyController.create)
 router.get('/surveys/:id', SurveyController.show)
 router.post('/surveys/:surveyId/vote/:optionId', SurveyController.addVote)
+router.put('/surveys/:id', SurveyController.update)
+router.delete('/surveys/:id', SurveyController.delete)
 
 router.get('/users/:id', UserController.getByID)
 router.put('/users/:id', UserController.edit)

@@ -1,8 +1,7 @@
 const request = require('supertest')
-const app = require('../../src/app')
-const dbUtil = require('../utils/dbUtil')
-const Factory = require('../Factory')
-const User = require('../../src/app/models/User')
+const app = require('../../../src/app')
+const dbUtil = require('../../utils/dbUtil')
+const Factory = require('../../Factory')
 
 describe('register route', () => {
   beforeEach(async () => await dbUtil.cleanTables())
@@ -61,7 +60,7 @@ describe('register route', () => {
   it('should return 400 if the email is already registered', async () => {
     const body = Factory.generateUserData({ email: 'user@mail.com' })
 
-    await User.create(body)
+    await Factory.createUser(body)
 
     const response = await request(app)
       .post('/register')
