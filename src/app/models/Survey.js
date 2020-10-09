@@ -44,7 +44,7 @@ class Survey {
 
   async update (id, data) {
     await knex('surveys').update(data).where({ id })
-    const survey = await knex('surveys').where({ id }).first
+    const survey = await knex('surveys').where({ id }).first()
     return survey
   }
 
