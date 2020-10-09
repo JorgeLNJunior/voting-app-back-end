@@ -7,7 +7,13 @@
 [![Travis Build](https://travis-ci.com/JorgeLNJunior/voting-app-back-end.svg?branch=master)](https://travis-ci.com/github/JorgeLNJunior/voting-app-back-end)
 [![Coverage Status](https://coveralls.io/repos/github/JorgeLNJunior/voting-app-back-end/badge.svg?branch=master)](https://coveralls.io/github/JorgeLNJunior/voting-app-back-end?branch=master)
 [![License](https://img.shields.io/github/license/JorgeLNJunior/voting-app-back-end)](https://github.com/JorgeLNJunior/voting-app-back-end/blob/master/LICENSE.md)
-[![CodeFactor](https://www.codefactor.io/repository/github/jorgelnjunior/voting-app-back-end/badge)](https://www.codefactor.io/repository/github/jorgelnjunior/voting-app-back-end)
+[![Release](https://img.shields.io/github/v/release/JorgeLNJunior/voting-app-back-end?color=lgreen)](https://github.com/JorgeLNJunior/voting-app-back-end/releases)
+
+</div>
+
+<div align="center">
+
+[Frontend](https://github.com/JorgeLNJunior/voting-app-front-end/) | [Backend](https://github.com/JorgeLNJunior/voting-app-back-end/)
 
 </div>
 
