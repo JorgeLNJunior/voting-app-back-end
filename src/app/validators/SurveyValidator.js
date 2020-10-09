@@ -37,6 +37,18 @@ class SurveyValidator {
       throw new EmptyFieldError('title or description is required')
     }
   }
+
+  async validateDelete (surveyId, tokenId) {
+    var survey = await Survey.getById(surveyId)
+
+    if (!survey) {
+      throw new ResourceNotFoundError('survey not found')
+    }
+    // eslint-disable-next-line
+    if (survey.user_id != tokenId) {
+      throw new UnauthorizedError('unauthorized')
+    }
+  }
 }
 
 module.exports = new SurveyValidator()

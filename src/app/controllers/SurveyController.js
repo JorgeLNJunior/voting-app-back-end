@@ -1,6 +1,6 @@
 const Survey = require('../models/Survey')
 const validator = require('../validators/SurveyValidator')
-const { ResourceNotFoundError, UnauthorizedError } = require('../helpers/Errors')
+const { ResourceNotFoundError } = require('../helpers/Errors')
 
 class SurveyController {
   async create (req, res, next) {
@@ -67,16 +67,7 @@ class SurveyController {
     const { id } = req.params
 
     try {
-      const survey = await Survey.getById(id)
-
-      if (!survey) {
-        throw new ResourceNotFoundError('survey not found')
-      }
-      // eslint-disable-next-line
-      if (survey.user_id != req.UID) {
-        throw new UnauthorizedError('unauthorized')
-      }
-
+      await validator.validateDelete(id, req.UID)
       await Survey.delete(id)
       return res.json({ message: 'survey delete' })
     } catch (error) {
