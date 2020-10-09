@@ -53,4 +53,33 @@ describe('update survey', () => {
 
     expect(response.status).toBe(400)
   })
+
+  it('should return 401 if token is not provided', async () => {
+    const data = Factory.generateSurveyData()
+    const user = await Factory.createUser()
+    const survey = await Factory.createSurvey(user.id)
+
+    const response = await request(app)
+      .put(`/surveys/${survey.id}`)
+      .set('Content-Type', 'application/json')
+      .send({ title: data.title, desciption: data.desciption })
+
+    expect(response.status).toBe(401)
+  })
+
+  it('should return 401 if token is not valid', async () => {
+    const data = Factory.generateSurveyData()
+    const user = await Factory.createUser()
+    const survey = await Factory.createSurvey(user.id)
+
+    const token = 'invalidToken'
+
+    const response = await request(app)
+      .put(`/surveys/${survey.id}`)
+      .set('Content-Type', 'application/json')
+      .set('Authorization', `Bearer ${token}`)
+      .send({ title: data.title, desciption: data.desciption })
+
+    expect(response.status).toBe(401)
+  })
 })

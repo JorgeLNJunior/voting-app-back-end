@@ -16,7 +16,6 @@ describe('survey delete', () => {
 
     const response = await request(app)
       .delete(`/surveys/${survey.id}`)
-      .set('Content-Type', 'application/json')
       .set('Authorization', `Bearer ${token}`)
 
     expect(response.status).toBe(200)
@@ -30,9 +29,30 @@ describe('survey delete', () => {
 
     const response = await request(app)
       .delete(`/surveys/${ramdomNumber}`)
-      .set('Content-Type', 'application/json')
       .set('Authorization', `Bearer ${token}`)
 
     expect(response.status).toBe(400)
+  })
+
+  it('should return 401 if token is not provided', async () => {
+    const user = await Factory.createUser()
+    const survey = await Factory.createSurvey(user.id)
+
+    const response = await request(app)
+      .delete(`/surveys/${survey.id}`)
+
+    expect(response.status).toBe(401)
+  })
+
+  it('should return 401 if token is not valid', async () => {
+    const user = await Factory.createUser()
+    const survey = await Factory.createSurvey(user.id)
+    const token = 'invalidtoken'
+
+    const response = await request(app)
+      .delete(`/surveys/${survey.id}`)
+      .set('Authorization', `Bearer ${token}`)
+
+    expect(response.status).toBe(401)
   })
 })
