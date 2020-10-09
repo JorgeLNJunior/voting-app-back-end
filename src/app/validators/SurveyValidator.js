@@ -29,7 +29,6 @@ class SurveyValidator {
     if (!survey) {
       throw new ResourceNotFoundError('survey not found')
     }
-    /* istanbul ignore next */
     // eslint-disable-next-line
     if (survey.user_id != tokenId) {
       throw new UnauthorizedError('you are not authorized to edit this resource')

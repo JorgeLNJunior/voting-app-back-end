@@ -82,4 +82,21 @@ describe('update survey', () => {
 
     expect(response.status).toBe(401)
   })
+
+  it('should return 403 if user does not have privileges to update', async () => {
+    const data = Factory.generateSurveyData()
+    const user = await Factory.createUser()
+    const userWithoutPrivileges = await Factory.createUser()
+    const survey = await Factory.createSurvey(user.id)
+
+    const token = AuthService.generateToken(userWithoutPrivileges.id)
+
+    const response = await request(app)
+      .put(`/surveys/${survey.id}`)
+      .set('Content-Type', 'application/json')
+      .set('Authorization', `Bearer ${token}`)
+      .send({ title: data.title, desciption: data.desciption })
+
+    expect(response.status).toBe(403)
+  })
 })
