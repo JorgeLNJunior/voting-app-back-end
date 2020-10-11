@@ -34,25 +34,6 @@ describe('Show survey route', () => {
     expect(response.status).toBe(400)
   })
 
-  it('should return 401 if token is not provided', async () => {
-    const response = await request(app)
-      .get('/surveys/' + 50)
-      .set('Content-Type', 'application/json')
-
-    expect(response.status).toBe(401)
-  })
-
-  it('should return 401 if token is not valid', async () => {
-    const token = 'invalidtoken'
-
-    const response = await request(app)
-      .get('/surveys/' + 50)
-      .set('Authorization', `Bearer ${token}`)
-      .set('Content-Type', 'application/json')
-
-    expect(response.status).toBe(401)
-  })
-
   it('should return 500 if an internal error has ocurred', async () => {
     const user = await Factory.createUser()
     const survey = await Factory.createSurvey(user.id)
