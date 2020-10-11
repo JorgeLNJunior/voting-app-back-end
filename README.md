@@ -25,19 +25,19 @@ do repositório [app-ideas](https://github.com/florinpop17/app-ideas). Para mais
 </div>
 
 ## Rotas
-| HTTP   | Rota                             | Descrição                    |
-|--------|----------------------------------|------------------------------|
-| POST   | /register                        | registra um novo usuário     |
-| POST   | /login                           | autentica um usuário         |
-| GET    | /users/:id                       | lista um usuário             |
-| PUT    | /users/:id                       | edita um usuário             |
-| DELETE | /users/:id                       | deleta um usuário            |
-| POST   | /surveys                         | cria uma survey              |
-| GET    | /surveys/:surveyID               | lista uma survey             |
-| POST   | /suveys/:surveyID/vote/:optionID | vota em uma opção            |
-| PUT    | /surveys/:surveyID               | edita uma survey             |
-| DELETE | /surveys/:surveyID               | deleta uma survey            |
-| GET    | /docs                            | acessa a documentação da API |
+| HTTP   | Rota                             | Descrição                    | Autenticação |
+|--------|----------------------------------|------------------------------|--------------|
+| POST   | /register                        | registra um novo usuário     | não          |
+| POST   | /login                           | autentica um usuário         | não          |
+| GET    | /users/:id                       | lista um usuário             | sim          |
+| PUT    | /users/:id                       | edita um usuário             | sim          |
+| DELETE | /users/:id                       | deleta um usuário            | sim          |
+| POST   | /surveys                         | cria uma survey              | sim          |
+| GET    | /surveys/:surveyID               | lista uma survey             | não          |
+| POST   | /suveys/:surveyID/vote/:optionID | vota em uma opção            | sim          |
+| PUT    | /surveys/:surveyID               | edita uma survey             | sim          |
+| DELETE | /surveys/:surveyID               | deleta uma survey            | sim          |
+| GET    | /docs                            | acessa a documentação da API | não          |
 
 ## Tecnologias
 - A fazer
