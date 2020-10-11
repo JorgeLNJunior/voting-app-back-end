@@ -4,6 +4,7 @@
 
 # SQLite
 *.sqlite
+*.sqlite-journal
 
 ### Node ###
 # Logs
