@@ -29,6 +29,15 @@ class Survey {
     return survey
   }
 
+  async show (data) {
+    const surveys = await knex('surveys').where(data)
+    for (var s of surveys) {
+      const options = await knex('options').where({ survey_id: s.id })
+      s.options = options
+    }
+    return surveys
+  }
+
   async addVote (surveyID, optionID) {
     var survey = await this.getById(surveyID)
     const option = survey.options.find(option => option.id == optionID) // eslint-disable-line
