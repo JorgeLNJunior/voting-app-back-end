@@ -29,15 +29,13 @@ class Survey {
   }
 
   async addVote (surveyID, optionID) {
-    var survey = await knex('surveys').where({ id: surveyID }).first()
+    var survey = await this.show({ id: surveyID })
     // eslint-disable-next-line
-    const option = survey.options.find(option => option.id == optionID)
-    if (!option) {
-      return undefined
-    }
+    const option = survey[0].options.find(option => option.id == optionID)
+
     await knex('options').update({ votes: option.votes + 1 }).where({ id: option.id })
 
-    survey = await this.getById(surveyID)
+    survey = await this.show({ id: surveyID })
 
     return survey
   }

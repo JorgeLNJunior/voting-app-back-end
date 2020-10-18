@@ -28,10 +28,9 @@ class SurveyController {
   async addVote (req, res, next) {
     try {
       const { surveyId, optionId } = req.params
+      await validator.validateAddVote(surveyId, optionId)
+
       const survey = await Survey.addVote(surveyId, optionId)
-      if (!survey) {
-        throw new ResourceNotFoundError('survey not found')
-      }
       return res.json(survey)
     } catch (error) {
       next(error)
