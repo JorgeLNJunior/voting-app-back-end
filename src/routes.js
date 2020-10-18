@@ -7,7 +7,7 @@ const AuthMiddleware = require('./app/middlewares/AuthMiddleware')
 router.post('/register', AuthController.register)
 router.post('/login', AuthController.login)
 
-router.get('/surveys/:id', SurveyController.show)
+router.get('/surveys', SurveyController.show)
 
 router.use(AuthMiddleware)
 
