@@ -16,7 +16,7 @@ router.post('/surveys/:surveyId/vote/:optionId', SurveyController.addVote)
 router.put('/surveys/:id', SurveyController.update)
 router.delete('/surveys/:id', SurveyController.delete)
 
-router.get('/users/:id', UserController.getByID)
+router.get('/users/', UserController.show)
 router.put('/users/:id', UserController.edit)
 router.delete('/users/:id', UserController.delete)
 

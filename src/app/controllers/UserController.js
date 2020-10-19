@@ -3,14 +3,16 @@ const UserValidator = require('../validators/UserValidator')
 const { ResourceNotFoundError, UnauthorizedError } = require('../helpers/Errors')
 
 class UserController {
-  async getByID (req, res, next) {
+  async show (req, res, next) {
     try {
-      const user = await User.getByID(req.params.id)
-      if (!user) {
+      console.log(req.query)
+      const users = await User.show(req.query)
+      if (!users[0]) {
         throw new ResourceNotFoundError('user not found')
       }
-      return res.json({ user: user })
+      return res.json({ users: users })
     } catch (error) {
+      console.log(error)
       next(error)
     }
   }

@@ -16,8 +16,8 @@ class User {
     return user
   }
 
-  async getByID (id) {
-    const user = await knex('users').where({ id }).first()
+  async show (data) {
+    const user = await knex('users').where(data)
     return user
   }
 
