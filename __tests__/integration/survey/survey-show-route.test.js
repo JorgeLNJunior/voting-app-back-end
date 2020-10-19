@@ -15,11 +15,11 @@ describe('Show survey route', () => {
     const token = AuthService.generateToken(user.id)
 
     const response = await request(app)
-      .get('/surveys/' + survey.id)
+      .get('/surveys/?id=' + survey.id)
       .set('Content-Type', 'application/json')
       .set('Authorization', `Bearer ${token}`)
 
-    expect(response.body).toHaveProperty('survey')
+    expect(response.body).toHaveProperty('surveys')
   })
 
   it('should return 400 if survey does not exist', async () => {
@@ -27,7 +27,7 @@ describe('Show survey route', () => {
     const token = AuthService.generateToken(user.id)
 
     const response = await request(app)
-      .get('/surveys/' + 50)
+      .get('/surveys/?id=' + 50)
       .set('Content-Type', 'application/json')
       .set('Authorization', `Bearer ${token}`)
 
@@ -42,7 +42,7 @@ describe('Show survey route', () => {
     await dbUtil.destroyConnection() // force database error
 
     const response = await request(app)
-      .get('/surveys/' + survey.id)
+      .get('/surveys/?id=' + survey.id)
       .set('Content-Type', 'application/json')
       .set('Authorization', `Bearer ${token}`)
 

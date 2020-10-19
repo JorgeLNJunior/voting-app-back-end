@@ -24,13 +24,13 @@ class SurveyValidator {
 
   async validateUpdate (body, surveyId, tokenId) {
     const { title, description } = body
-    var survey = await Survey.getById(surveyId)
+    var survey = await Survey.show({ id: surveyId })
 
-    if (!survey) {
+    if (!survey[0]) {
       throw new ResourceNotFoundError('survey not found')
     }
     // eslint-disable-next-line
-    if (survey.user_id != tokenId) {
+    if (survey[0].user_id != tokenId) {
       throw new UnauthorizedError('you are not authorized to edit this resource')
     }
     if (!title && !description) {
@@ -39,14 +39,25 @@ class SurveyValidator {
   }
 
   async validateDelete (surveyId, tokenId) {
-    var survey = await Survey.getById(surveyId)
+    var survey = await Survey.show({ id: surveyId })
 
-    if (!survey) {
+    if (!survey[0]) {
       throw new ResourceNotFoundError('survey not found')
     }
     // eslint-disable-next-line
-    if (survey.user_id != tokenId) {
+    if (survey[0].user_id != tokenId) {
       throw new UnauthorizedError('unauthorized')
+    }
+  }
+
+  async validateAddVote (surveyId, optionId) {
+    var survey = await Survey.show({ id: surveyId })
+    if (!survey[0]) {
+      throw new ResourceNotFoundError('survey not found')
+    }
+    // eslint-disable-next-line
+    if (!survey[0].options.find(option => option.id == optionId )) {
+      throw new ResourceNotFoundError('option not found')
     }
   }
 }
