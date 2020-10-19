@@ -3,7 +3,8 @@ const {
   EmailRegisteredError,
   FieldLengthError,
   InvalidEmailError,
-  UnauthorizedError
+  UnauthorizedError,
+  ResourceNotFoundError
 } = require('../helpers/Errors')
 const User = require('../models/User')
 
@@ -20,21 +21,39 @@ class UserValidator {
     if (!body.password) {
       throw new EmptyFieldError('field password is required')
     }
+
+    const user = await User.show({ email: body.email })
+    if (user[0]) {
+      throw new EmailRegisteredError('this email is already registered')
+    }
+
     if (body.password.length > 20) {
       throw new FieldLengthError('password field length must not be greater than 20')
-    }
-    if (await User.getByEmail(body.email)) {
-      throw new EmailRegisteredError('this email is already registered')
     }
     if (!EMAIL_REGEX.test(body.email.toLowerCase())) {
       throw new InvalidEmailError('invalid email')
     }
   }
 
-  validateEdit (body, id, tokenId) {
+  async validateEdit (body, id, tokenId) {
     const { name, password } = body
+    const user = await User.show({ id })
+    if (!user[0]) {
+      throw new ResourceNotFoundError('user not found')
+    }
     if (!name && !password) {
       throw new EmptyFieldError('name or password is required')
+    }
+    // eslint-disable-next-line
+    if (tokenId != id) {
+      throw new UnauthorizedError('unauthorized')
+    }
+  }
+
+  async validateDelete (id, tokenId) {
+    const user = await User.show({ id })
+    if (!user[0]) {
+      throw new ResourceNotFoundError('user not found')
     }
     // eslint-disable-next-line
     if (tokenId != id) {
