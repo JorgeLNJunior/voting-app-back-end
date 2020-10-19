@@ -43,7 +43,22 @@ do repositório [app-ideas](https://github.com/florinpop17/app-ideas). Para mais
 - A fazer
 
 ## Instalação e configuração
-- A fazer
+- Requerimentos
+  - [Node.js](https://nodejs.org/en/download/) na sua versão LTS
+  - Um banco de dados relacional, prefencialmente [MySql](https://dev.mysql.com/downloads/)
+- Opcional
+  - Um banco de dados [MongoDB](https://www.mongodb.com/try/download/community)
+
+- Instalação
+  - Clone o projeto: `git clone https://github.com/JorgeLNJunior/voting-app-back-end.git`
+  - Entre no diretório do projeto: `cd voting-app-back-end`
+  - Abra o projeto no VSCode: `code .`
+  - Instale as dependências: `npm i`
+  - Renomeie o arquivo `.env.example` para `.env`
+  - Crie duas bases de dados, uma para a aplicação e outras para os teste
+  - Altere as variáveis do arquivo `.env` com as configurações das bases de dados
+  - Para iniciar a aplicação execute `npm run dev`, para os testes execute `npm test`
+
 
 ## User Stories
 
