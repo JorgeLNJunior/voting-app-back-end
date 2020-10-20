@@ -25,25 +25,40 @@ do repositório [app-ideas](https://github.com/florinpop17/app-ideas). Para mais
 </div>
 
 ## Rotas
-| HTTP   | Rota                             | Descrição                    |
-|--------|----------------------------------|------------------------------|
-| POST   | /register                        | registra um novo usuário     |
-| POST   | /login                           | autentica um usuário         |
-| GET    | /users/:id                       | lista um usuário             |
-| PUT    | /users/:id                       | edita um usuário             |
-| DELETE | /users/:id                       | deleta um usuário            |
-| POST   | /surveys                         | cria uma survey              |
-| GET    | /surveys/:surveyID               | lista uma survey             |
-| POST   | /suveys/:surveyID/vote/:optionID | vota em uma opção            |
-| PUT    | /surveys/:surveyID               | edita uma survey             |
-| DELETE | /surveys/:surveyID               | deleta uma survey            |
-| GET    | /docs                            | acessa a documentação da API |
+| HTTP   | Rota                             | Descrição                    | Autenticação |
+|--------|----------------------------------|------------------------------|--------------|
+| POST   | /register                        | registra um novo usuário     | não          |
+| POST   | /login                           | autentica um usuário         | não          |
+| GET    | /users/:id                       | lista um usuário             | sim          |
+| PUT    | /users/:id                       | edita um usuário             | sim          |
+| DELETE | /users/:id                       | deleta um usuário            | sim          |
+| POST   | /surveys                         | cria uma survey              | sim          |
+| GET    | /surveys/:surveyID               | lista uma survey             | não          |
+| POST   | /suveys/:surveyID/vote/:optionID | vota em uma opção            | sim          |
+| PUT    | /surveys/:surveyID               | edita uma survey             | sim          |
+| DELETE | /surveys/:surveyID               | deleta uma survey            | sim          |
+| GET    | /docs                            | acessa a documentação da API | não          |
 
 ## Tecnologias
 - A fazer
 
 ## Instalação e configuração
-- A fazer
+- Requerimentos
+  - [Node.js](https://nodejs.org/en/download/) na sua versão LTS
+  - Um banco de dados relacional, prefencialmente [MySql](https://dev.mysql.com/downloads/)
+- Opcional
+  - Um banco de dados [MongoDB](https://www.mongodb.com/try/download/community)
+
+- Instalação
+  - Clone o projeto: `git clone https://github.com/JorgeLNJunior/voting-app-back-end.git`
+  - Entre no diretório do projeto: `cd voting-app-back-end`
+  - Abra o projeto no VSCode: `code .`
+  - Instale as dependências: `npm i`
+  - Renomeie o arquivo `.env.example` para `.env`
+  - Crie duas bases de dados, uma para a aplicação e outras para os teste
+  - Altere as variáveis do arquivo `.env` com as configurações das bases de dados
+  - Para iniciar a aplicação execute `npm run dev`, para os testes execute `npm test`
+
 
 ## User Stories
 

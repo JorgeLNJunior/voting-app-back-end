@@ -15,11 +15,11 @@ class SurveyController {
 
   async show (req, res, next) {
     try {
-      const survey = await Survey.getById(req.params.id)
-      if (!survey) {
+      const surveys = await Survey.show(req.query)
+      if (surveys.length <= 0) {
         throw new ResourceNotFoundError('survey not found')
       }
-      return res.json({ survey })
+      return res.json({ surveys })
     } catch (error) {
       next(error)
     }
@@ -28,10 +28,9 @@ class SurveyController {
   async addVote (req, res, next) {
     try {
       const { surveyId, optionId } = req.params
+      await validator.validateAddVote(surveyId, optionId)
+
       const survey = await Survey.addVote(surveyId, optionId)
-      if (!survey) {
-        throw new ResourceNotFoundError('survey not found')
-      }
       return res.json(survey)
     } catch (error) {
       next(error)

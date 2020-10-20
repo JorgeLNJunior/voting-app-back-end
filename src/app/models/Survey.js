@@ -19,25 +19,23 @@ class Survey {
     return survey
   }
 
-  async getById (id) {
-    const survey = await knex('surveys').where({ id }).first()
-    if (!survey) {
-      return undefined
+  async show (data) {
+    const surveys = await knex('surveys').where(data)
+    for (var s of surveys) {
+      const options = await knex('options').where({ survey_id: s.id })
+      s.options = options
     }
-    const options = await knex('options').where({ survey_id: id })
-    survey.options = options
-    return survey
+    return surveys
   }
 
   async addVote (surveyID, optionID) {
-    var survey = await this.getById(surveyID)
-    const option = survey.options.find(option => option.id == optionID) // eslint-disable-line
-    if (!option) {
-      return undefined
-    }
+    var survey = await this.show({ id: surveyID })
+    // eslint-disable-next-line
+    const option = survey[0].options.find(option => option.id == optionID)
+
     await knex('options').update({ votes: option.votes + 1 }).where({ id: option.id })
 
-    survey = await this.getById(surveyID)
+    survey = await this.show({ id: surveyID })
 
     return survey
   }

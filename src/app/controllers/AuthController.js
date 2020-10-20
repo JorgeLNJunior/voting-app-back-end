@@ -18,14 +18,14 @@ class AuthController {
   async login (req, res, next) {
     const { email, password } = req.body
     try {
-      const user = await User.getByEmail(email)
-      if (!user) {
+      const user = await User.show({ email })
+      if (!user[0]) {
         throw new UnregisteredEmailError('unregistered email')
       }
-      if (!await bcrypt.compare(password, user.password)) {
+      if (!await bcrypt.compare(password, user[0].password)) {
         throw new InvalidCredentialError('invalid credentials ')
       }
-      const token = AuthService.generateToken(user.id)
+      const token = AuthService.generateToken(user[0].id)
       return res.json({ token: token })
     } catch (error) {
       next(error)

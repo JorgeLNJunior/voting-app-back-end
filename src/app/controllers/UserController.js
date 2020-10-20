@@ -1,15 +1,15 @@
 const User = require('../models/User')
 const UserValidator = require('../validators/UserValidator')
-const { ResourceNotFoundError, UnauthorizedError } = require('../helpers/Errors')
+const { ResourceNotFoundError } = require('../helpers/Errors')
 
 class UserController {
-  async getByID (req, res, next) {
+  async show (req, res, next) {
     try {
-      const user = await User.getByID(req.params.id)
-      if (!user) {
+      const users = await User.show(req.query)
+      if (!users[0]) {
         throw new ResourceNotFoundError('user not found')
       }
-      return res.json({ user: user })
+      return res.json({ users: users })
     } catch (error) {
       next(error)
     }
@@ -19,10 +19,7 @@ class UserController {
     const { name, password } = req.body
     const { id } = req.params
     try {
-      if (!await User.getByID(id)) {
-        throw new ResourceNotFoundError('user not found')
-      }
-      UserValidator.validateEdit(req.body, id, req.UID)
+      await UserValidator.validateEdit(req.body, id, req.UID)
       const data = {}
       /* istanbul ignore next */
       if (name) {
@@ -42,13 +39,7 @@ class UserController {
   async delete (req, res, next) {
     const { id } = req.params
     try {
-      if (!await User.getByID(id)) {
-        throw new ResourceNotFoundError('user not found')
-      }
-      // eslint-disable-next-line
-      if (req.UID != id) {
-        throw new UnauthorizedError('unauthorized')
-      }
+      await UserValidator.validateDelete(id, req.UID)
       await User.delete(id)
       return res.json({ message: 'user has been deleted' })
     } catch (error) {

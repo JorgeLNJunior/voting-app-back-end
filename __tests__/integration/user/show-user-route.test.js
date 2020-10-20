@@ -13,7 +13,7 @@ describe('show user route', () => {
     const token = AuthService.generateToken(user.id)
 
     const response = await request(app)
-      .get(`/users/${user.id}`)
+      .get(`/users/?id=${user.id}`)
       .set('Content-Type', 'application/json')
       .set('Authorization', `Bearer ${token}`)
 
@@ -25,11 +25,11 @@ describe('show user route', () => {
     const token = AuthService.generateToken(user.id)
 
     const response = await request(app)
-      .get(`/users/${user.id}`)
+      .get(`/users/?id=${user.id}`)
       .set('Content-Type', 'application/json')
       .set('Authorization', `Bearer ${token}`)
 
-    expect(response.body).toHaveProperty('user')
+    expect(response.body).toHaveProperty('users')
   })
 
   it('should return 400 if user does not exist', async () => {
@@ -37,7 +37,7 @@ describe('show user route', () => {
     const token = AuthService.generateToken(user.id)
 
     const response = await request(app)
-      .get('/users/300')
+      .get('/users/?id=300')
       .set('Content-Type', 'application/json')
       .set('Authorization', `Bearer ${token}`)
 
@@ -48,7 +48,7 @@ describe('show user route', () => {
     const user = await Factory.createUser()
 
     const response = await request(app)
-      .get(`/users/${user.id}`)
+      .get(`/users/?id=${user.id}`)
       .set('Content-Type', 'application/json')
 
     expect(response.status).toBe(401)
@@ -59,7 +59,7 @@ describe('show user route', () => {
     const token = 'invalidToken'
 
     const response = await request(app)
-      .get(`/users/${user.id}`)
+      .get(`/users/?id=${user.id}`)
       .set('Content-Type', 'application/json')
       .set('Authorization', `Bearer ${token}`)
 
@@ -73,7 +73,7 @@ describe('show user route', () => {
     await dbUtil.destroyConnection() // force database error
 
     const response = await request(app)
-      .get('/users/300')
+      .get('/users/?id=300')
       .set('Content-Type', 'application/json')
       .set('Authorization', `Bearer ${token}`)
 
