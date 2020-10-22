@@ -1,6 +1,5 @@
 const Survey = require('../models/Survey')
 const validator = require('../validators/SurveyValidator')
-const { ResourceNotFoundError } = require('../helpers/Errors')
 
 class SurveyController {
   async create (req, res, next) {
@@ -16,9 +15,6 @@ class SurveyController {
   async show (req, res, next) {
     try {
       const surveys = await Survey.show(req.query)
-      if (surveys.length <= 0) {
-        throw new ResourceNotFoundError('survey not found')
-      }
       return res.json({ surveys })
     } catch (error) {
       next(error)
