@@ -12,7 +12,7 @@ exports.up = function (knex) {
     table.string('name', 30).notNullable()
     table.integer('votes').notNullable().defaultTo(0)
     table.timestamp('created_at').defaultTo(knex.fn.now())
-    table.timestamp('updated_at').defaultTo(knex.fn.now())
+    table.timestamp('updated_at').defaultTo(knex.raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'))
   })
 }
 
