@@ -22,6 +22,18 @@ describe('Vote add route', () => {
     expect(response.status).toBe(200)
   })
 
+  it('should return 400 if survey does not exist', async () => {
+    const user = await Factory.createUser()
+    const token = AuthService.generateToken(user.id)
+
+    const response = await request(app)
+      .post('/surveys/' + 500 + '/vote/' + 1)
+      .set('Content-Type', 'application/json')
+      .set('Authorization', `Bearer ${token}`)
+
+    expect(response.status).toBe(400)
+  })
+
   it('should return 400 if option does not exist', async () => {
     const user = await Factory.createUser()
     const survey = await Factory.createSurvey(user.id)
