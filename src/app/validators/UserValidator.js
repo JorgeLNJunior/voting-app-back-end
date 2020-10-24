@@ -4,9 +4,11 @@ const {
   FieldLengthError,
   InvalidEmailError,
   UnauthorizedError,
-  ResourceNotFoundError
+  ResourceNotFoundError,
+  InvalidCredentialError
 } = require('../helpers/Errors')
 const User = require('../models/User')
+const bcrypt = require('bcryptjs')
 
 class UserValidator {
   async validateRegister (body) {
@@ -58,6 +60,23 @@ class UserValidator {
     // eslint-disable-next-line
     if (tokenId != id) {
       throw new UnauthorizedError('unauthorized')
+    }
+  }
+
+  async validatePasswordUpdate (userId, tokenId, oldPass) {
+    const user = await User.show({ id: userId })
+
+    if (!user[0]) {
+      throw new ResourceNotFoundError('user not found')
+    }
+
+    // eslint-disable-next-line
+    if (tokenId != userId) {
+      throw new UnauthorizedError('unauthorized')
+    }
+
+    if (!await bcrypt.compare(oldPass, user[0].password)) {
+      throw new InvalidCredentialError('wrong password')
     }
   }
 }

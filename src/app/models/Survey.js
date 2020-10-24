@@ -20,7 +20,7 @@ class Survey {
   }
 
   async show (data) {
-    const surveys = await knex('surveys').where(data)
+    const surveys = await knex('surveys').where(data).orderByRaw('rand()')
     for (var s of surveys) {
       const options = await knex('options').where({ survey_id: s.id })
       s.options = options

@@ -1,6 +1,7 @@
 const User = require('../models/User')
 const UserValidator = require('../validators/UserValidator')
 const { ResourceNotFoundError } = require('../helpers/Errors')
+const bcrypt = require('bcryptjs')
 
 class UserController {
   async show (req, res, next) {
@@ -46,6 +47,23 @@ class UserController {
       await UserValidator.validateDelete(id, req.UID)
       await User.delete(id)
       return res.json({ message: 'user has been deleted' })
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  async updatePassword (req, res, next) {
+    const { id } = req.params
+    const { oldPassword, newPassword } = req.body
+
+    try {
+      await UserValidator.validatePasswordUpdate(id, req.UID, oldPassword)
+
+      const password = await bcrypt.hash(newPassword, 10)
+
+      const user = await User.update(id, { password })
+
+      return res.json({ user })
     } catch (error) {
       next(error)
     }
