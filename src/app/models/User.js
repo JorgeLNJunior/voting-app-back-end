@@ -17,7 +17,7 @@ class User {
   }
 
   async show (data) {
-    const user = await knex('users').where(data)
+    const user = await knex('users').where(data).orderByRaw('rand()')
     return user
   }
 
