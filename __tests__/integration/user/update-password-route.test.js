@@ -40,4 +40,21 @@ describe('update password route', () => {
 
     expect(response.status).toBe(400)
   })
+
+  it('should return 400 if user does not exist', async () => {
+    const password = 'password'
+    const user = await Factory.createUser({ password })
+    const token = AuthService.generateToken(user.id)
+
+    const response = await request(app)
+      .post(`/users/${500}/password`)
+      .set('Content-Type', 'application/json')
+      .set('Authorization', `Bearer ${token}`)
+      .send({
+        oldPassword: password,
+        newPassword: 'newPassword'
+      })
+
+    expect(response.status).toBe(400)
+  })
 })
