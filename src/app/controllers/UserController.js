@@ -57,7 +57,7 @@ class UserController {
     const { oldPassword, newPassword } = req.body
 
     try {
-      await UserValidator.validatePasswordUpdate(id, oldPassword, newPassword)
+      await UserValidator.validatePasswordUpdate(id, req.UID, oldPassword)
 
       const password = await bcrypt.hash(newPassword, 10)
 

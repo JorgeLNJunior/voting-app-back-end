@@ -57,4 +57,22 @@ describe('update password route', () => {
 
     expect(response.status).toBe(400)
   })
+
+  it('should return 403 if user does not have authorization to edit', async () => {
+    const password = 'password'
+    const user = await Factory.createUser({ password })
+    const user2 = await Factory.createUser()
+    const token = AuthService.generateToken(user2.id)
+
+    const response = await request(app)
+      .post(`/users/${user.id}/password`)
+      .set('Content-Type', 'application/json')
+      .set('Authorization', `Bearer ${token}`)
+      .send({
+        oldPassword: password,
+        newPassword: 'newPassword'
+      })
+
+    expect(response.status).toBe(403)
+  })
 })

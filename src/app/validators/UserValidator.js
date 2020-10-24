@@ -63,11 +63,16 @@ class UserValidator {
     }
   }
 
-  async validatePasswordUpdate (userId, oldPass, newPass) {
+  async validatePasswordUpdate (userId, tokenId, oldPass) {
     const user = await User.show({ id: userId })
 
     if (!user[0]) {
       throw new ResourceNotFoundError('user not found')
+    }
+
+    // eslint-disable-next-line
+    if (tokenId != userId) {
+      throw new UnauthorizedError('unauthorized')
     }
 
     if (!await bcrypt.compare(oldPass, user[0].password)) {
