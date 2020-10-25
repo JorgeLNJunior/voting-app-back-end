@@ -44,7 +44,8 @@
     "moment": "^2.28.0",
     "mongoose-morgan": "^1.0.15",
     "multer": "^1.4.2",
-    "mysql": "^2.18.1"
+    "mysql": "^2.18.1",
+    "streamifier": "^0.1.1"
   },
   "devDependencies": {
     "@types/jest": "^26.0.8",
