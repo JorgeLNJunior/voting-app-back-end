@@ -1,12 +1,12 @@
 const request = require('supertest')
 const app = require('../../../src/app')
-const dbUtil = require('../../utils/dbUtil')
+const dbHelper = require('../../helpers/DBHelper')
 const Factory = require('../../Factory')
 const AuthService = require('../../../src/app/services/AuthService')
 
 describe('show user route', () => {
-  beforeEach(async () => await dbUtil.cleanTables())
-  afterAll(async () => await dbUtil.destroyConnection())
+  beforeEach(async () => await dbHelper.cleanTables())
+  afterAll(async () => await dbHelper.destroyConnection())
 
   it('should return 200 if user exists', async () => {
     const user = await Factory.createUser()
@@ -70,7 +70,7 @@ describe('show user route', () => {
     const user = await Factory.createUser()
     const token = AuthService.generateToken(user.id)
 
-    await dbUtil.destroyConnection() // force database error
+    await dbHelper.destroyConnection() // force database error
 
     const response = await request(app)
       .get('/users/?id=300')
