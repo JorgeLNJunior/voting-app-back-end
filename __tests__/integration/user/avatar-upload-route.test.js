@@ -1,4 +1,5 @@
 const request = require('supertest')
+const path = require('path')
 const app = require('../../../src/app')
 const dbHelper = require('../../helpers/DBHelper')
 const Factory = require('../../Factory')
@@ -16,7 +17,7 @@ describe('show user route', () => {
       .post(`/users/${user.id}/avatar`)
       .set('Content-Type', 'multipart/form-data')
       .set('Authorization', `Bearer ${token}`)
-      .attach('avatar', `${__dirname}/avatar.jpeg`)
+      .attach('avatar', path.join(`${__dirname}/../../helpers/images/avatar.jpeg`))
 
     expect(response.status).toBe(200)
   })
