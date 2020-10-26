@@ -15,7 +15,7 @@ class AzureStorage {
         }
         stream.createReadStream(avatar.buffer)
           .pipe(blobService.createWriteStreamToBlockBlob('storage', `avatars/${fileName}`, {},
-            (error, result, response) => {
+            function (error, result, response) {
               if (error) {
                 reject(Error('upload error'))
               }
