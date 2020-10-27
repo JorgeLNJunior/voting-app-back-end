@@ -17,7 +17,7 @@ describe('show user route', () => {
       .post(`/users/${user.id}/avatar`)
       .set('Content-Type', 'multipart/form-data')
       .set('Authorization', `Bearer ${token}`)
-      .attach('avatar', path.join(`${__dirname}/../../helpers/images/avatar.jpeg`))
+      .attach('avatar', path.join(`${__dirname}/../../helpers/images/avatar.jpeg`)) // eslint-disable-line
 
     expect(response.status).toBe(200)
   })
@@ -31,7 +31,7 @@ describe('show user route', () => {
       .post(`/users/${user2.id}/avatar`)
       .set('Content-Type', 'multipart/form-data')
       .set('Authorization', `Bearer ${token}`)
-      .attach('avatar', path.join(`${__dirname}/../../helpers/images/avatar.jpeg`))
+      .attach('avatar', path.join(`${__dirname}/../../helpers/images/avatar.jpeg`)) // eslint-disable-line
 
     expect(response.status).toBe(403)
   })
