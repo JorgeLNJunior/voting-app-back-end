@@ -18,18 +18,14 @@ class UserController {
   }
 
   async edit (req, res, next) {
-    const { name, password, avatar } = req.body
+    const { name, avatar } = req.body
     const { id } = req.params
     try {
-      await UserValidator.validateEdit(req.body, id, req.UID)
+      await UserValidator.validateEdit(id, req.UID)
       const data = {}
       /* istanbul ignore next */
       if (name) {
         data.name = name
-      }
-      /* istanbul ignore next */
-      if (password) {
-        data.password = password
       }
       /* istanbul ignore next */
       if (avatar) {

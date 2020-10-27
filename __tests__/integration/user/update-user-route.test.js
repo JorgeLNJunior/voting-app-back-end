@@ -36,19 +36,6 @@ describe('update user route', () => {
     expect(response.body).toHaveProperty('user')
   })
 
-  it('should return 400 if name and password is not provided', async () => {
-    const user = await Factory.createUser()
-    const token = AuthService.generateToken(user.id)
-
-    const response = await request(app)
-      .put(`/users/${user.id}`)
-      .set('Content-Type', 'application/json')
-      .set('Authorization', `Bearer ${token}`)
-      .send({})
-
-    expect(response.status).toBe(400)
-  })
-
   it('should return 400 if user does not exists', async () => {
     const user = await Factory.createUser()
     const data = Factory.generateUserData()

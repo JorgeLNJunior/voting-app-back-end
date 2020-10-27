@@ -37,14 +37,10 @@ class UserValidator {
     }
   }
 
-  async validateEdit (body, id, tokenId) {
-    const { name, password } = body
+  async validateEdit (id, tokenId) {
     const user = await User.show({ id })
     if (!user[0]) {
       throw new ResourceNotFoundError('user not found')
-    }
-    if (!name && !password) {
-      throw new EmptyFieldError('name or password is required')
     }
     // eslint-disable-next-line
     if (tokenId != id) {
