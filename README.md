@@ -46,9 +46,10 @@ do repositório [app-ideas](https://github.com/florinpop17/app-ideas). Para mais
 ## Instalação e configuração
 - Requerimentos
   - [Node.js](https://nodejs.org/en/download/) na sua versão LTS
-  - Um banco de dados relacional, prefencialmente [MySql](https://dev.mysql.com/downloads/)
+  - Um banco de dados [MySql](https://dev.mysql.com/downloads/)
 - Opcional
-  - Um banco de dados [MongoDB](https://www.mongodb.com/try/download/community)
+  - Um banco de dados [MongoDB](https://www.mongodb.com/try/download/community) para os logs
+  - Uma [storage account](https://azure.microsoft.com/en-us/services/storage/) no Azure para upload dos avatares de usuário
 
 - Instalação
   - Clone o projeto: `git clone https://github.com/JorgeLNJunior/voting-app-back-end.git`
@@ -56,8 +57,8 @@ do repositório [app-ideas](https://github.com/florinpop17/app-ideas). Para mais
   - Abra o projeto no VSCode: `code .`
   - Instale as dependências: `npm i`
   - Renomeie o arquivo `.env.example` para `.env`
-  - Crie duas bases de dados, uma para a aplicação e outras para os teste
-  - Altere as variáveis do arquivo `.env` com as configurações das bases de dados
+  - Crie duas bases de dados, uma para a aplicação e outras para os testes
+  - Altere as variáveis do arquivo `.env` com as configurações das bases de dados e da storage account
   - Para iniciar a aplicação execute `npm run dev`, para os testes execute `npm test`
 
 
