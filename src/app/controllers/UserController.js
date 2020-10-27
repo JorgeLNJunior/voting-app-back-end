@@ -1,6 +1,7 @@
 const User = require('../models/User')
 const UserValidator = require('../validators/UserValidator')
 const { ResourceNotFoundError } = require('../helpers/Errors')
+const Storage = require('../services/AzureStorage')
 const bcrypt = require('bcryptjs')
 
 class UserController {
@@ -17,18 +18,14 @@ class UserController {
   }
 
   async edit (req, res, next) {
-    const { name, password, avatar } = req.body
+    const { name, avatar } = req.body
     const { id } = req.params
     try {
-      await UserValidator.validateEdit(req.body, id, req.UID)
+      await UserValidator.validateEdit(id, req.UID)
       const data = {}
       /* istanbul ignore next */
       if (name) {
         data.name = name
-      }
-      /* istanbul ignore next */
-      if (password) {
-        data.password = password
       }
       /* istanbul ignore next */
       if (avatar) {
@@ -63,6 +60,19 @@ class UserController {
 
       const user = await User.update(id, { password })
 
+      return res.json({ user })
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  async avatarUpload (req, res, next) {
+    const { id } = req.params
+    try {
+      await UserValidator.validateAvatarUpload(id, req.UID)
+
+      const fileUrl = await Storage.storeAvatar(req.file)
+      const user = await User.update(id, { avatar: fileUrl })
       return res.json({ user })
     } catch (error) {
       next(error)

@@ -1,11 +1,11 @@
 const request = require('supertest')
 const app = require('../../../src/app')
-const dbUtil = require('../../utils/dbUtil')
+const dbHelper = require('../../helpers/DBHelper')
 const Factory = require('../../Factory')
 
 describe('login route', () => {
-  beforeEach(async () => await dbUtil.cleanTables())
-  afterAll(async () => await dbUtil.destroyConnection())
+  beforeEach(async () => await dbHelper.cleanTables())
+  afterAll(async () => await dbHelper.destroyConnection())
 
   it('should return 200 if user credentials are valid', async () => {
     const data = Factory.generateUserData()

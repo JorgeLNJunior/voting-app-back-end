@@ -1,12 +1,12 @@
 const request = require('supertest')
 const Factory = require('../../Factory')
 const app = require('../../../src/app')
-const dbUtil = require('../../utils/dbUtil')
+const dbHelper = require('../../helpers/DBHelper')
 const AuthService = require('../../../src/app/services/AuthService')
 
 describe('Show survey route', () => {
-  beforeEach(async () => await dbUtil.cleanTables())
-  afterAll(async () => await dbUtil.destroyConnection())
+  beforeEach(async () => await dbHelper.cleanTables())
+  afterAll(async () => await dbHelper.destroyConnection())
 
   it('should return a object with the survey', async () => {
     const user = await Factory.createUser()
@@ -27,7 +27,7 @@ describe('Show survey route', () => {
     const survey = await Factory.createSurvey(user.id)
     const token = AuthService.generateToken(user.id)
 
-    await dbUtil.destroyConnection() // force database error
+    await dbHelper.destroyConnection() // force database error
 
     const response = await request(app)
       .get('/surveys/?id=' + survey.id)
