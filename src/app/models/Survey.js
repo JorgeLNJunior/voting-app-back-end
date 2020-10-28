@@ -5,7 +5,8 @@ class Survey {
     const surveyId = await knex('surveys').insert({
       title: data.title,
       description: data.description,
-      user_id: userId
+      user_id: userId,
+      banner: data.banner
     })
 
     await data.options.forEach(async option => {

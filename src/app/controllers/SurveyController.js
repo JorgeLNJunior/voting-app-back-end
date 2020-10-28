@@ -1,11 +1,18 @@
 const Survey = require('../models/Survey')
 const validator = require('../validators/SurveyValidator')
+const AzureStorage = require('../services/AzureStorage')
 
 class SurveyController {
   async create (req, res, next) {
     try {
       validator.validateCreate(req.body)
-      const survey = await Survey.create(req.body, req.UID)
+
+      const bannerBase64 = req.body.banner
+      const bannerUrl = await AzureStorage.storeSurveyBanner(bannerBase64)
+      const data = req.body
+      data.banner = bannerUrl
+
+      const survey = await Survey.create(data, req.UID)
       return res.json({ survey })
     } catch (error) {
       next(error)
