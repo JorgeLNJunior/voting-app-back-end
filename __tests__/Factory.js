@@ -1,6 +1,7 @@
 const faker = require('faker/locale/pt_BR')
 const Survey = require('../src/app/models/Survey')
 const User = require('../src/app/models/User')
+const fs = require('fs')
 
 class Factory {
   async createSurvey (userId) {
@@ -23,9 +24,13 @@ class Factory {
     if (!overwrite) {
       overwrite = {}
     }
+
+    const base64Images = JSON.parse(fs.readFileSync(`${__dirname}/helpers/images/base64Images.json`, 'utf-8')) // eslint-disable-line
+
     surveyData = {
       title: overwrite.title || faker.lorem.sentence(3),
       description: overwrite.description || faker.lorem.paragraph(1),
+      banner: overwrite.banner || base64Images.images[0],
       options: overwrite.options || [
         { name: faker.lorem.word() },
         { name: faker.lorem.word() },
