@@ -60,6 +60,11 @@ class SurveyController {
       if (description) {
         newData.description = description
       }
+      if (req.body.banner) {
+        const bannerBase64 = req.body.banner
+        const bannerUrl = await AzureStorage.storeSurveyBanner(bannerBase64)
+        newData.banner = bannerUrl
+      }
 
       const survey = await Survey.update(id, newData)
 
