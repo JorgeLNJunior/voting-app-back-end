@@ -46,7 +46,7 @@ class SurveyController {
 
   async update (req, res, next) {
     const { id } = req.params
-    const { title, description } = req.body
+    const { title, description, banner } = req.body
 
     try {
       await validator.validateUpdate(req.body, id, req.UID)
@@ -60,8 +60,8 @@ class SurveyController {
       if (description) {
         newData.description = description
       }
-      if (req.body.banner) {
-        const bannerBase64 = req.body.banner
+      if (banner) {
+        const bannerBase64 = banner
         const bannerUrl = await AzureStorage.storeSurveyBanner(bannerBase64)
         newData.banner = bannerUrl
       }

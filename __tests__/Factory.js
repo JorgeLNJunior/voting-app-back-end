@@ -5,7 +5,7 @@ const fs = require('fs')
 
 class Factory {
   async createSurvey (userId) {
-    const data = this.generateSurveyData()
+    const data = this.generateSurveyData({ banner: 'exclude' })
     const survey = await Survey.create(data, userId)
     return survey
   }
@@ -41,6 +41,7 @@ class Factory {
     if (overwrite.title === 'exclude') delete surveyData.title
     if (overwrite.description === 'exclude') delete surveyData.description
     if (overwrite.options === 'exclude') delete surveyData.options
+    if (overwrite.banner === 'exclude') delete surveyData.banner
 
     return surveyData
   }
