@@ -7,10 +7,14 @@ class SurveyController {
     try {
       validator.validateCreate(req.body)
 
-      const bannerBase64 = req.body.banner
-      const bannerUrl = await AzureStorage.storeSurveyBanner(bannerBase64)
       const data = req.body
-      data.banner = bannerUrl
+      if (req.body.banner) {
+        const bannerBase64 = req.body.banner
+        const bannerUrl = await AzureStorage.storeSurveyBanner(bannerBase64)
+        data.banner = bannerUrl
+      } else {
+        data.banner = 'https://picsum.photos/900/300'
+      }
 
       const survey = await Survey.create(data, req.UID)
       return res.json({ survey })
