@@ -1,11 +1,13 @@
 const faker = require('faker/locale/pt_BR')
 const Survey = require('../src/app/models/Survey')
 const User = require('../src/app/models/User')
+const Storage = require('../src/app/services/AzureStorage')
 const fs = require('fs')
 
 class Factory {
   async createSurvey (userId) {
-    const data = this.generateSurveyData({ banner: 'exclude' })
+    const data = this.generateSurveyData()
+    data.banner = await Storage.storeSurveyBanner(data.banner)
     const survey = await Survey.create(data, userId)
     return survey
   }
