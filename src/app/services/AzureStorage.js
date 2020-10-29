@@ -12,13 +12,13 @@ class AzureStorage {
         publicAccessLevel: 'blob'
       }, function (error, result, response) {
         if (error) {
-          reject(Error('azure storage container error'))
+          reject(error)
         }
         stream.createReadStream(avatar.buffer)
           .pipe(blobService.createWriteStreamToBlockBlob('storage', `avatars/${fileName}`, {},
             function (error, result, response) {
               if (error) {
-                reject(Error('upload error'))
+                reject(error)
               }
               resolve(`https://vtappstorage.blob.core.windows.net/storage/avatars/${fileName}`)
             }))
