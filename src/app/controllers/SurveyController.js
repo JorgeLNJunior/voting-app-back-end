@@ -80,7 +80,7 @@ class SurveyController {
     try {
       await validator.validateDelete(id, req.UID)
       await Survey.delete(id)
-      return res.json({ message: 'survey delete' })
+      return res.json({ message: 'survey deleted' })
     } catch (error) {
       next(error)
     }
