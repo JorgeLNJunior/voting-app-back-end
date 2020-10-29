@@ -1,0 +1,8 @@
+{
+  "recommendations": [
+    "mikestead.dotenv",
+    "editorconfig.editorconfig",
+    "chenxsan.vscode-standardjs",
+    "ms-azuretools.vscode-docker"
+  ]
+}
