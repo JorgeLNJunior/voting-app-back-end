@@ -61,6 +61,7 @@ do repositório [app-ideas](https://github.com/florinpop17/app-ideas). Para mais
   - Crie duas bases de dados, uma para a aplicação e outras para os testes
   - Altere as variáveis do arquivo `.env` com as configurações das bases de dados e da storage account
   - Para iniciar a aplicação execute `npm run dev`, para os testes execute `npm test`
+  - Caso esteja usado o VSCode abra a command palette com `Ctrl + Shift + P` e use o comando `Extensions: Show Recommended Extensions` para ver as extensões recomendadas
 
 
 ## User Stories
