@@ -31,6 +31,7 @@ do repositório [app-ideas](https://github.com/florinpop17/app-ideas). Para mais
 | POST   | /login                           | autentica um usuário         | não          |
 | GET    | /users/:id                       | lista um usuário             | sim          |
 | POST   | /users/:id/password              | altera a senha do usuário    | sim          |
+| POST   | /users/:id/avatar                | altera o avatar do usuário   | sim          |
 | PUT    | /users/:id                       | edita um usuário             | sim          |
 | DELETE | /users/:id                       | deleta um usuário            | sim          |
 | POST   | /surveys                         | cria uma survey              | sim          |
@@ -49,7 +50,7 @@ do repositório [app-ideas](https://github.com/florinpop17/app-ideas). Para mais
   - Um banco de dados [MySql](https://dev.mysql.com/downloads/)
 - Opcional
   - Um banco de dados [MongoDB](https://www.mongodb.com/try/download/community) para os logs
-  - Uma [storage account](https://azure.microsoft.com/en-us/services/storage/) no Azure para upload dos avatares de usuário
+  - Uma [storage account](https://azure.microsoft.com/en-us/services/storage/) no Azure para upload dos avatares e banners
 
 - Instalação
   - Clone o projeto: `git clone https://github.com/JorgeLNJunior/voting-app-back-end.git`
@@ -60,6 +61,7 @@ do repositório [app-ideas](https://github.com/florinpop17/app-ideas). Para mais
   - Crie duas bases de dados, uma para a aplicação e outras para os testes
   - Altere as variáveis do arquivo `.env` com as configurações das bases de dados e da storage account
   - Para iniciar a aplicação execute `npm run dev`, para os testes execute `npm test`
+  - Caso esteja usado o VSCode abra a command palette com `Ctrl + Shift + P` e use o comando `Extensions: Show Recommended Extensions` para ver as extensões recomendadas
 
 
 ## User Stories
