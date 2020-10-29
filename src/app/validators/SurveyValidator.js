@@ -1,4 +1,9 @@
-const { EmptyFieldError, ResourceNotFoundError, UnauthorizedError } = require('../helpers/Errors')
+const {
+  EmptyFieldError,
+  ResourceNotFoundError,
+  UnauthorizedError,
+  FieldLengthError
+} = require('../helpers/Errors')
 const Survey = require('../models/Survey')
 
 class SurveyValidator {
@@ -11,8 +16,12 @@ class SurveyValidator {
       throw new EmptyFieldError('field description is required')
     }
 
-    if (!body.options || body.options.length <= 0) {
-      throw new EmptyFieldError('field options is required')
+    if (body.option.length > 5) {
+      throw new FieldLengthError('should have a max of 5 options')
+    }
+
+    if (!body.options || body.options.length < 2) {
+      throw new FieldLengthError('should have 2 options or more')
     } else {
       for (var option of body.options) {
         if (!option.name) {
