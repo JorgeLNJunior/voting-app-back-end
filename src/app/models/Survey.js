@@ -22,7 +22,7 @@ class Survey {
 
   async show (data) {
     const surveys = await knex('surveys').where(data).orderByRaw('rand()')
-    for (var s of surveys) {
+    for (const s of surveys) {
       const options = await knex('options').where({ survey_id: s.id })
       s.options = options
     }
@@ -30,7 +30,7 @@ class Survey {
   }
 
   async addVote (surveyID, optionID) {
-    var survey = await this.show({ id: surveyID })
+    let survey = await this.show({ id: surveyID })
     // eslint-disable-next-line
     const option = survey[0].options.find(option => option.id == optionID)
 

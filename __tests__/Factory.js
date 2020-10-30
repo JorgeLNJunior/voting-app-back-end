@@ -22,7 +22,7 @@ class Factory {
    * @param {Object} overwrite a object with survey data to overwrite (title, description or options)
    */
   generateSurveyData (overwrite) {
-    var surveyData = {}
+    let surveyData = {}
     if (!overwrite) {
       overwrite = {}
     }
@@ -60,7 +60,7 @@ class Factory {
     const email = faker.internet.email(name)
     const password = faker.internet.password(8, true)
 
-    var userData = {
+    const userData = {
       name: overwrite.name || name,
       email: overwrite.email || email,
       password: overwrite.password || password

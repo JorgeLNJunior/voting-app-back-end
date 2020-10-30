@@ -28,7 +28,7 @@ class SurveyValidator {
       throw new FieldLengthError('should have a max of 5 options')
     }
 
-    for (var option of body.options) {
+    for (const option of body.options) {
       if (!option.name) {
         throw new EmptyFieldError('field option name is required')
       }
@@ -37,7 +37,7 @@ class SurveyValidator {
 
   async validateUpdate (body, surveyId, tokenId) {
     const { title, description } = body
-    var survey = await Survey.show({ id: surveyId })
+    const survey = await Survey.show({ id: surveyId })
 
     if (!survey[0]) {
       throw new ResourceNotFoundError('survey not found')
@@ -52,7 +52,7 @@ class SurveyValidator {
   }
 
   async validateDelete (surveyId, tokenId) {
-    var survey = await Survey.show({ id: surveyId })
+    const survey = await Survey.show({ id: surveyId })
 
     if (!survey[0]) {
       throw new ResourceNotFoundError('survey not found')
@@ -64,7 +64,7 @@ class SurveyValidator {
   }
 
   async validateAddVote (surveyId, optionId) {
-    var survey = await Survey.show({ id: surveyId })
+    const survey = await Survey.show({ id: surveyId })
     if (!survey[0]) {
       throw new ResourceNotFoundError('survey not found')
     }
