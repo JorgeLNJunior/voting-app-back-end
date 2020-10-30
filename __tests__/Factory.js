@@ -1,7 +1,7 @@
 const faker = require('faker/locale/pt_BR')
 const Survey = require('../src/app/models/Survey')
 const User = require('../src/app/models/User')
-const Storage = require('../src/app/services/AzureStorage')
+const Storage = require('../src/app/services/storage/IndexStorage')
 const fs = require('fs')
 
 class Factory {
