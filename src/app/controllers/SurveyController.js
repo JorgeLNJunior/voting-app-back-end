@@ -1,6 +1,7 @@
 const Survey = require('../models/Survey')
 const validator = require('../validators/SurveyValidator')
 const Storage = require('../services/storage/IndexStorage')
+const storage = new Storage(process.env.APP_STORAGE || 'local')
 
 class SurveyController {
   async create (req, res, next) {
@@ -9,7 +10,6 @@ class SurveyController {
 
       const data = req.body
       if (req.body.banner) {
-        const storage = new Storage('local')
         const bannerBase64 = req.body.banner
         const bannerUrl = await storage.storeSurveyBanner(bannerBase64)
         data.banner = bannerUrl
@@ -62,7 +62,6 @@ class SurveyController {
         newData.description = description
       }
       if (banner) {
-        const storage = new Storage('local')
         const bannerBase64 = banner
         const bannerUrl = await storage.storeSurveyBanner(bannerBase64)
         newData.banner = bannerUrl

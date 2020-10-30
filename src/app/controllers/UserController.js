@@ -1,8 +1,8 @@
 const User = require('../models/User')
 const UserValidator = require('../validators/UserValidator')
 const { ResourceNotFoundError } = require('../helpers/Errors')
-// const Storage = require('../services/AzureStorage')
 const Storage = require('../services/storage/IndexStorage')
+const storage = new Storage(process.env.APP_STORAGE || 'local')
 const bcrypt = require('bcryptjs')
 
 class UserController {
@@ -30,7 +30,6 @@ class UserController {
       }
       /* istanbul ignore next */
       if (avatar) {
-        const storage = new Storage('local')
         data.avatar = await storage.storeAvatar(avatar)
       }
       const user = await User.update(id, data)
