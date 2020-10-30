@@ -57,6 +57,6 @@
     "nodemon": "^2.0.4",
     "sqlite3": "^5.0.0",
     "standard": "^15.0.0",
-    "supertest": "^5.0.0"
+    "supertest": "^6.0.0"
   }
 }
