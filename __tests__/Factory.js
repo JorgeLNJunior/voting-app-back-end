@@ -32,7 +32,7 @@ class Factory {
     surveyData = {
       title: overwrite.title || faker.lorem.sentence(3),
       description: overwrite.description || faker.lorem.words(10),
-      banner: overwrite.banner || base64Images.images[0],
+      banner: overwrite.banner || base64Images.banner,
       options: overwrite.options || [
         { name: faker.lorem.word() },
         { name: faker.lorem.word() },
