@@ -1,5 +1,4 @@
 const router = require('express').Router()
-const upload = require('multer')()
 
 const SurveyController = require('./app/controllers/SurveyController')
 const AuthController = require('./app/controllers/AuthController')
@@ -26,6 +25,5 @@ router.get('/users/', UserController.show)
 router.put('/users/:id', UserController.edit)
 router.delete('/users/:id', UserController.delete)
 router.post('/users/:id/password', UserController.updatePassword)
-router.post('/users/:id/avatar', upload.single('avatar'), UserController.avatarUpload)
 
 module.exports = router

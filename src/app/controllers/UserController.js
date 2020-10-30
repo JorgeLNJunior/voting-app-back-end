@@ -29,7 +29,7 @@ class UserController {
       }
       /* istanbul ignore next */
       if (avatar) {
-        data.avatar = avatar
+        data.avatar = await Storage.storeAvatar(avatar)
       }
       const user = await User.update(id, data)
       return res.json({ user: user })
@@ -60,19 +60,6 @@ class UserController {
 
       const user = await User.update(id, { password })
 
-      return res.json({ user })
-    } catch (error) {
-      next(error)
-    }
-  }
-
-  async avatarUpload (req, res, next) {
-    const { id } = req.params
-    try {
-      await UserValidator.validateAvatarUpload(id, req.UID)
-
-      const fileUrl = await Storage.storeAvatar(req.file)
-      const user = await User.update(id, { avatar: fileUrl })
       return res.json({ user })
     } catch (error) {
       next(error)
