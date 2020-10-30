@@ -8,8 +8,8 @@
     "dev": "nodemon src/server.js --ignore __tests__ --ignore docs",
     "pretest": "NODE_ENV=test knex migrate:latest",
     "test": "NODE_ENV=test jest --runInBand --passWithNoTests",
-    "test:ci": "npm run test -- --coverage --silent",
-    "test:coveralls": "npm run test:ci && coveralls < __tests__/coverage/lcov.info",
+    "test:coverage": "npm run test -- --coverage --silent",
+    "ci": "npm run test:coverage && coveralls < __tests__/coverage/lcov.info",
     "posttest": "NODE_ENV=test knex migrate:rollback --all"
   },
   "standard": {
