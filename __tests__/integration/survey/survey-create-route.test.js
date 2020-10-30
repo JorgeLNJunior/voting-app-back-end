@@ -99,7 +99,25 @@ describe('survey', () => {
   })
 
   it('should return 400 if option name is empty', async () => {
-    const body = Factory.generateSurveyData({ options: [{ name: '' }] })
+    const body = Factory.generateSurveyData({ options: [{ name: '' }, { name: '' }] })
+
+    const user = await Factory.createUser()
+    const token = AuthService.generateToken(user.id)
+
+    const response = await request(app)
+      .post('/surveys')
+      .set('Content-Type', 'application/json')
+      .set('Authorization', `Bearer ${token}`)
+      .send(body)
+
+    expect(response.status).toBe(400)
+  })
+
+  it('should return 400 if is greater than 5', async () => {
+    const body = Factory.generateSurveyData()
+    body.options.push({ name: 'name' })
+    body.options.push({ name: 'name' })
+    body.options.push({ name: 'name' })
 
     const user = await Factory.createUser()
     const token = AuthService.generateToken(user.id)

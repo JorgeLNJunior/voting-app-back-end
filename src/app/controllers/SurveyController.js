@@ -61,6 +61,7 @@ class SurveyController {
       if (description) {
         newData.description = description
       }
+      /* istanbul ignore next */
       if (banner) {
         const bannerBase64 = banner
         const bannerUrl = await Storage.storeSurveyBanner(bannerBase64)

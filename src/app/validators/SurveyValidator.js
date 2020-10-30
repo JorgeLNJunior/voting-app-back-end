@@ -29,7 +29,7 @@ class SurveyValidator {
     }
 
     for (const option of body.options) {
-      if (!option.name) {
+      if (!option.name || option.name === '') {
         throw new EmptyFieldError('field option name is required')
       }
     }
