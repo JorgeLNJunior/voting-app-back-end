@@ -7,7 +7,7 @@ before_install:
   - mysql -e 'CREATE DATABASE IF NOT EXISTS vtapptest;'
 script:
   - standard
-  - npm test:ci
+  - npm run test:ci
 env:
   - APP_SECRET=LZQyY1RkcS
 
