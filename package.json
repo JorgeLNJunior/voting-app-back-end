@@ -8,8 +8,8 @@
     "dev": "nodemon src/server.js --ignore __tests__ --ignore docs",
     "pretest": "NODE_ENV=test knex migrate:latest",
     "test": "NODE_ENV=test jest --runInBand --passWithNoTests",
-    "test:ci": "npm run test -- --coverage --silent",
-    "test:coveralls": "npm run test:ci && coveralls < __tests__/coverage/lcov.info",
+    "test:coverage": "npm run test -- --coverage --silent",
+    "test:ci": "npm run test:coverage && coveralls < __tests__/coverage/lcov.info",
     "posttest": "NODE_ENV=test knex migrate:rollback --all"
   },
   "standard": {
@@ -17,7 +17,8 @@
       "jest"
     ],
     "ignore": [
-      "/src/public"
+      "/src/public",
+      "knexfile.js"
     ]
   },
   "repository": {
@@ -31,6 +32,7 @@
   },
   "homepage": "https://github.com/JorgeLNJunior/voting-app-back-end#readme",
   "dependencies": {
+    "azure-storage": "^2.10.3",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
@@ -51,8 +53,7 @@
     "jest": "^26.2.2",
     "lint-staged": "^10.2.11",
     "nodemon": "^2.0.4",
-    "sqlite3": "^5.0.0",
-    "standard": "^14.3.4",
-    "supertest": "^5.0.0"
+    "standard": "^16.0.0",
+    "supertest": "^6.0.0"
   }
 }

@@ -1,4 +1,9 @@
-const { EmptyFieldError, ResourceNotFoundError, UnauthorizedError } = require('../helpers/Errors')
+const {
+  EmptyFieldError,
+  ResourceNotFoundError,
+  UnauthorizedError,
+  FieldLengthError
+} = require('../helpers/Errors')
 const Survey = require('../models/Survey')
 
 class SurveyValidator {
@@ -11,20 +16,28 @@ class SurveyValidator {
       throw new EmptyFieldError('field description is required')
     }
 
-    if (!body.options || body.options.length <= 0) {
-      throw new EmptyFieldError('field options is required')
-    } else {
-      for (var option of body.options) {
-        if (!option.name) {
-          throw new EmptyFieldError('field option name is required')
-        }
+    if (!body.options) {
+      throw new FieldLengthError('field options is required')
+    }
+
+    if (body.options.length < 2) {
+      throw new FieldLengthError('should have 2 options or more')
+    }
+
+    if (body.options.length > 5) {
+      throw new FieldLengthError('should have a max of 5 options')
+    }
+
+    for (const option of body.options) {
+      if (!option.name || option.name === '') {
+        throw new EmptyFieldError('field option name is required')
       }
     }
   }
 
   async validateUpdate (body, surveyId, tokenId) {
     const { title, description } = body
-    var survey = await Survey.show({ id: surveyId })
+    const survey = await Survey.show({ id: surveyId })
 
     if (!survey[0]) {
       throw new ResourceNotFoundError('survey not found')
@@ -39,7 +52,7 @@ class SurveyValidator {
   }
 
   async validateDelete (surveyId, tokenId) {
-    var survey = await Survey.show({ id: surveyId })
+    const survey = await Survey.show({ id: surveyId })
 
     if (!survey[0]) {
       throw new ResourceNotFoundError('survey not found')
@@ -51,7 +64,7 @@ class SurveyValidator {
   }
 
   async validateAddVote (surveyId, optionId) {
-    var survey = await Survey.show({ id: surveyId })
+    const survey = await Survey.show({ id: surveyId })
     if (!survey[0]) {
       throw new ResourceNotFoundError('survey not found')
     }

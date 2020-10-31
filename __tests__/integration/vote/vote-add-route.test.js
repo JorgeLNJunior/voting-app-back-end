@@ -1,12 +1,12 @@
 const request = require('supertest')
-const dbUtil = require('../../utils/dbUtil')
+const dbHelper = require('../../helpers/DBHelper')
 const Factory = require('../../Factory')
 const app = require('../../../src/app')
 const AuthService = require('../../../src/app/services/AuthService')
 
 describe('Vote add route', () => {
-  beforeEach(async () => await dbUtil.cleanTables())
-  afterAll(async () => await dbUtil.destroyConnection())
+  beforeEach(async () => await dbHelper.cleanTables())
+  afterAll(async () => await dbHelper.destroyConnection())
 
   it('should return 200 if vote is added', async () => {
     const user = await Factory.createUser()
@@ -77,7 +77,7 @@ describe('Vote add route', () => {
     const survey = await Factory.createSurvey(user.id)
     const token = AuthService.generateToken(user.id)
 
-    await dbUtil.destroyConnection() // force database error
+    await dbHelper.destroyConnection() // force database error
 
     const response = await request(app)
       .post('/surveys/' + survey.id + '/vote/' + 1)

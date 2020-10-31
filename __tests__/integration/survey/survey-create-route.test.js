@@ -1,12 +1,12 @@
 const request = require('supertest')
 const app = require('../../../src/app')
-const dbUtil = require('../../utils/dbUtil')
+const dbHelper = require('../../helpers/DBHelper')
 const Factory = require('../../Factory')
 const AuthService = require('../../../src/app/services/AuthService')
 
 describe('survey', () => {
-  beforeEach(async () => await dbUtil.cleanTables())
-  afterAll(async () => await dbUtil.destroyConnection())
+  beforeEach(async () => await dbHelper.cleanTables())
+  afterAll(async () => await dbHelper.destroyConnection())
 
   it('should return 200 if survey is created', async () => {
     const body = Factory.generateSurveyData()
@@ -99,7 +99,25 @@ describe('survey', () => {
   })
 
   it('should return 400 if option name is empty', async () => {
-    const body = Factory.generateSurveyData({ options: [{ name: '' }] })
+    const body = Factory.generateSurveyData({ options: [{ name: '' }, { name: '' }] })
+
+    const user = await Factory.createUser()
+    const token = AuthService.generateToken(user.id)
+
+    const response = await request(app)
+      .post('/surveys')
+      .set('Content-Type', 'application/json')
+      .set('Authorization', `Bearer ${token}`)
+      .send(body)
+
+    expect(response.status).toBe(400)
+  })
+
+  it('should return 400 if is greater than 5', async () => {
+    const body = Factory.generateSurveyData()
+    body.options.push({ name: 'name' })
+    body.options.push({ name: 'name' })
+    body.options.push({ name: 'name' })
 
     const user = await Factory.createUser()
     const token = AuthService.generateToken(user.id)
@@ -143,7 +161,7 @@ describe('survey', () => {
     const user = await Factory.createUser()
     const token = AuthService.generateToken(user.id)
 
-    await dbUtil.destroyConnection() // force database error
+    await dbHelper.destroyConnection() // force database error
 
     const response = await request(app)
       .post('/surveys')
