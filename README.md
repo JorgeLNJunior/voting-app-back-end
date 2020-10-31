@@ -61,6 +61,7 @@ do repositório [app-ideas](https://github.com/florinpop17/app-ideas). Para mais
   - Renomeie o arquivo `.env.example` para `.env`
   - Crie duas bases de dados, uma para a aplicação e outras para os testes
   - Altere as variáveis do arquivo `.env` com as configurações das bases de dados e da storage account
+  - Banner e avatares podem ser armazenados tanto em uma storage account quanto localmente, para utilizar uma storage account modifique a variável `AZURE_STORAGE` no arquivo `.env` para `true`, ou `false` para armazenar localmente
   - Para iniciar a aplicação execute `npm run dev`, para os testes execute `npm test`
   - Caso esteja usado o VSCode abra a command palette com `Ctrl + Shift + P` e use o comando `Extensions: Show Recommended Extensions` para ver as extensões recomendadas
 
