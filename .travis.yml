@@ -9,5 +9,5 @@ script:
   - standard
   - npm ci
 env:
-  - APP_SECRET=dhaowhuafawjfioa
+  - APP_SECRET=LZQyY1RkcS
 
