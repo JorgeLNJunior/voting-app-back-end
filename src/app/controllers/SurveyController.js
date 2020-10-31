@@ -1,6 +1,6 @@
 const Survey = require('../models/Survey')
 const validator = require('../validators/SurveyValidator')
-const AzureStorage = require('../services/AzureStorage')
+const Storage = require('../services/storage/IndexStorage')
 
 class SurveyController {
   async create (req, res, next) {
@@ -10,9 +10,10 @@ class SurveyController {
       const data = req.body
       if (req.body.banner) {
         const bannerBase64 = req.body.banner
-        const bannerUrl = await AzureStorage.storeSurveyBanner(bannerBase64)
+        const bannerUrl = await Storage.storeSurveyBanner(bannerBase64)
         data.banner = bannerUrl
       } else {
+        /* istanbul ignore next */
         data.banner = 'https://picsum.photos/900/300'
       }
 
@@ -60,9 +61,10 @@ class SurveyController {
       if (description) {
         newData.description = description
       }
+      /* istanbul ignore next */
       if (banner) {
         const bannerBase64 = banner
-        const bannerUrl = await AzureStorage.storeSurveyBanner(bannerBase64)
+        const bannerUrl = await Storage.storeSurveyBanner(bannerBase64)
         newData.banner = bannerUrl
       }
 

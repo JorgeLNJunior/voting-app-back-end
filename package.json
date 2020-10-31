@@ -8,8 +8,8 @@
     "dev": "nodemon src/server.js --ignore __tests__ --ignore docs",
     "pretest": "NODE_ENV=test knex migrate:latest",
     "test": "NODE_ENV=test jest --runInBand --passWithNoTests",
-    "test:ci": "npm run test -- --coverage --silent",
-    "test:coveralls": "npm run test:ci && coveralls < __tests__/coverage/lcov.info",
+    "test:coverage": "npm run test -- --coverage --silent",
+    "test:ci": "npm run test:coverage && coveralls < __tests__/coverage/lcov.info",
     "posttest": "NODE_ENV=test knex migrate:rollback --all"
   },
   "standard": {
@@ -44,9 +44,7 @@
     "knex-cleaner": "^1.3.0",
     "moment": "^2.28.0",
     "mongoose-morgan": "^1.0.15",
-    "multer": "^1.4.2",
-    "mysql": "^2.18.1",
-    "streamifier": "^0.1.1"
+    "mysql": "^2.18.1"
   },
   "devDependencies": {
     "@types/jest": "^26.0.8",
@@ -55,7 +53,6 @@
     "jest": "^26.2.2",
     "lint-staged": "^10.2.11",
     "nodemon": "^2.0.4",
-    "sqlite3": "^5.0.0",
     "standard": "^16.0.0",
     "supertest": "^6.0.0"
   }

@@ -1,6 +1,12 @@
 # Created by https://www.toptal.com/developers/gitignore/api/node,sonarqube,visualstudiocode
 # Edit at https://www.toptal.com/developers/gitignore?templates=node,sonarqube,visualstudiocode
 
+# Uploads
+src/public/uploads/*/*.png
+src/public/uploads/*/*.jpg
+src/public/uploads/*/*.jpeg
+
+
 ### Node ###
 # Logs
 logs

@@ -1,7 +1,7 @@
 const User = require('../models/User')
 const UserValidator = require('../validators/UserValidator')
 const { ResourceNotFoundError } = require('../helpers/Errors')
-const Storage = require('../services/AzureStorage')
+const Storage = require('../services/storage/IndexStorage')
 const bcrypt = require('bcryptjs')
 
 class UserController {

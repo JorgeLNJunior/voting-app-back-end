@@ -75,13 +75,6 @@ class UserValidator {
       throw new InvalidCredentialError('wrong password')
     }
   }
-
-  async validateAvatarUpload (userId, tokenId) {
-    // eslint-disable-next-line
-    if (userId != tokenId) {
-      throw new UnauthorizedError('unauthorized')
-    }
-  }
 }
 
 module.exports = new UserValidator()

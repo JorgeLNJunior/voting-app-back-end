@@ -9,7 +9,7 @@ class AzureStorage {
         publicAccessLevel: 'blob'
       }, function (error, result, response) {
         if (error) {
-          reject(Error('azure storage container error'))
+          reject(error)
         }
 
         const base64 = avatarBase64.split(';base64,').pop()
@@ -23,7 +23,7 @@ class AzureStorage {
         readable.pipe(blobService.createWriteStreamToBlockBlob('storage', `avatars/${fileName}`, {},
           function (error, result, response) {
             if (error) {
-              reject(Error('upload error'))
+              reject(error)
             }
             resolve(`https://vtappstorage.blob.core.windows.net/storage/avatars/${fileName}`)
           }))
@@ -37,7 +37,7 @@ class AzureStorage {
         publicAccessLevel: 'blob'
       }, function (error, result, response) {
         if (error) {
-          reject(Error('azure storage container error'))
+          reject(error)
         }
 
         const base64 = bannerBase64.split(';base64,').pop()
@@ -51,7 +51,7 @@ class AzureStorage {
         readable.pipe(blobService.createWriteStreamToBlockBlob('storage', `banners/${fileName}`, {},
           function (error, result, response) {
             if (error) {
-              reject(Error('upload error'))
+              reject(error)
             }
             resolve(`https://vtappstorage.blob.core.windows.net/storage/banners/${fileName}`)
           }))
