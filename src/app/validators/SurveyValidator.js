@@ -73,6 +73,23 @@ class SurveyValidator {
       throw new ResourceNotFoundError('option not found')
     }
   }
+
+  async validateBannerUpdate (banner, surveyId, tokenId) {
+    const survey = await Survey.show({ id: surveyId })
+
+    if (!survey[0]) {
+      throw new ResourceNotFoundError('survey not found')
+    }
+    if (survey[0].user_id != tokenId) { // eslint-disable-line
+      throw new UnauthorizedError('unauthorized')
+    }
+    if (!banner) {
+      throw new EmptyFieldError('banner is required')
+    }
+    if (banner.size > 2000000) {
+      throw new FieldLengthError('banner size must be less than 2mb')
+    }
+  }
 }
 
 module.exports = new SurveyValidator()

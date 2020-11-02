@@ -72,6 +72,21 @@ class SurveyController {
       next(error)
     }
   }
+
+  async updateBanner (req, res, next) {
+    const banner = req.file
+    const { id } = req.params
+
+    try {
+      await validator.validateBannerUpdate(banner, id, req.UID)
+
+      const survey = await Survey.updateBanner(id, banner)
+
+      return res.json({ survey })
+    } catch (error) {
+      next(error)
+    }
+  }
 }
 
 module.exports = new SurveyController()

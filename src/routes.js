@@ -1,4 +1,5 @@
 const router = require('express').Router()
+const upload = require('multer')()
 
 const SurveyController = require('./app/controllers/SurveyController')
 const AuthController = require('./app/controllers/AuthController')
@@ -19,6 +20,7 @@ router.post('/surveys', SurveyController.create)
 router.post('/surveys/:surveyId/vote/:optionId', SurveyController.addVote)
 router.put('/surveys/:id', SurveyController.update)
 router.delete('/surveys/:id', SurveyController.delete)
+router.post('/surveys/:id/banner', upload.single('banner'), SurveyController.updateBanner)
 
 // user routes
 router.get('/users/', UserController.show)
