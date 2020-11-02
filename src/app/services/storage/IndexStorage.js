@@ -2,18 +2,18 @@ const AzureStorage = require('./AzureStorage')
 const LocalStorage = require('./LocalStorage')
 
 class Storage {
-  async storeAvatar (avatarBase64) {
+  async storeUserAvatar (avatarFile) {
     if (process.env.AZURE_STORAGE === 'true') {
-      return AzureStorage.storeAvatar(avatarBase64)
+      return AzureStorage.storeUserAvatar(avatarFile)
     }
-    return LocalStorage.storeAvatar(avatarBase64)
+    return LocalStorage.storeUserAvatar(avatarFile)
   }
 
-  async storeSurveyBanner (bannerBase64) {
+  async storeSurveyBanner (bannerFile) {
     if (process.env.AZURE_STORAGE === 'true') {
-      return AzureStorage.storeSurveyBanner(bannerBase64)
+      return AzureStorage.storeSurveyBanner(bannerFile)
     }
-    return LocalStorage.storeSurveyBanner(bannerBase64)
+    return LocalStorage.storeSurveyBanner(bannerFile)
   }
 }
 
