@@ -1,8 +1,7 @@
 const { GeneralError } = require('../helpers/Errors')
 const multer = require('multer')
 
-module.exports = function (err, req, res) {
-  console.log(err)
+module.exports = function (err, req, res, next) {
   if (err instanceof multer.MulterError) {
     return res.status(400).json({ error: err.message })
   }
