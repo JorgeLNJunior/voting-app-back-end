@@ -27,5 +27,6 @@ router.get('/users/', UserController.show)
 router.put('/users/:id', UserController.edit)
 router.delete('/users/:id', UserController.delete)
 router.post('/users/:id/password', UserController.updatePassword)
+router.post('/users/:id/avatar', upload.single('avatar'), UserController.updateAvatar)
 
 module.exports = router

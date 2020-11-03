@@ -65,6 +65,20 @@ class UserController {
       next(error)
     }
   }
+
+  async updateAvatar (req, res, next) {
+    const { id } = req.params
+    const avatar = req.file
+
+    try {
+      await UserValidator.validateAvatarUpdate(id, req.UID, avatar)
+      const user = await User.updateAvatar(id, avatar)
+
+      return res.json({ user })
+    } catch (error) {
+      next(error)
+    }
+  }
 }
 
 module.exports = new UserController()

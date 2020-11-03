@@ -75,6 +75,20 @@ class UserValidator {
       throw new InvalidCredentialError('wrong password')
     }
   }
+
+  async validateAvatarUpdate (userId, tokenId, avatarFile) {
+    const user = await User.show({ id: userId })
+
+    if (!user[0]) {
+      throw new ResourceNotFoundError('user not found')
+    }
+    if (userId != tokenId) { // eslint-disable-line
+      throw new UnauthorizedError('unauthorized')
+    }
+    if (avatarFile.size > 1000000) {
+      throw new FieldLengthError('avatar size must be less than 1mb')
+    }
+  }
 }
 
 module.exports = new UserValidator()
