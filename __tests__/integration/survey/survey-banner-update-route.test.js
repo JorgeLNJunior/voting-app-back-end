@@ -19,7 +19,7 @@ describe('survey', () => {
 
     const response = await request(app)
       .post(`/surveys/${survey.id}/banner`)
-      .set('Content-Type', 'application/json')
+      .set('Content-Type', 'multipart/form-data')
       .set('Authorization', `Bearer ${token}`)
       .attach('banner', bannerPath)
 
