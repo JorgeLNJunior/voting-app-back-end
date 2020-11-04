@@ -1,5 +1,4 @@
 const request = require('supertest')
-const fs = require('fs')
 const app = require('../../../src/app')
 const dbHelper = require('../../helpers/DBHelper')
 const Factory = require('../../Factory')
@@ -13,21 +12,6 @@ describe('update user route', () => {
     const user = await Factory.createUser()
     const token = AuthService.generateToken(user.id)
     const data = Factory.generateUserData()
-
-    const response = await request(app)
-      .put(`/users/${user.id}`)
-      .set('Content-Type', 'application/json')
-      .set('Authorization', `Bearer ${token}`)
-      .send(data)
-
-    expect(response.status).toBe(200)
-  })
-
-  it('should return 200 user avatar has been updated', async () => {
-    const imgData = JSON.parse(fs.readFileSync(`${__dirname}/../../helpers/images/base64Images.json`)) //eslint-disable-line
-    const user = await Factory.createUser()
-    const token = AuthService.generateToken(user.id)
-    const data = { avatar: imgData.avatar }
 
     const response = await request(app)
       .put(`/users/${user.id}`)

@@ -1,4 +1,5 @@
 const knex = require('../../database/index')
+const Storage = require('../services/storage/IndexStorage')
 
 class Survey {
   async create (data, userId) {
@@ -49,6 +50,15 @@ class Survey {
 
   async delete (id) {
     await knex('surveys').delete().where({ id })
+  }
+
+  async updateBanner (surveyId, bannerFile) {
+    const url = await Storage.storeSurveyBanner(bannerFile)
+
+    await knex('surveys').update({ banner: url }).where({ id: surveyId })
+    const survey = await knex('surveys').where({ id: surveyId }).first()
+
+    return survey
   }
 }
 

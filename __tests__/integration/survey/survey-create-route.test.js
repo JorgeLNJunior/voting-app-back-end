@@ -8,7 +8,7 @@ describe('survey', () => {
   beforeEach(async () => await dbHelper.cleanTables())
   afterAll(async () => await dbHelper.destroyConnection())
 
-  it('should return 200 if survey is created', async () => {
+  it('should return 200 if survey has been created', async () => {
     const body = Factory.generateSurveyData()
 
     const user = await Factory.createUser()

@@ -40,6 +40,7 @@ do repositório [app-ideas](https://github.com/florinpop17/app-ideas). Para mais
 | POST   | /suveys/:surveyID/vote/:optionID | vota em uma opção            | sim          |
 | PUT    | /surveys/:surveyID               | edita uma survey             | sim          |
 | DELETE | /surveys/:surveyID               | deleta uma survey            | sim          |
+| POST   | /surveys/:id/banner              | altera o banner da survey    | sim          |
 | GET    | /docs                            | acessa a documentação da API | não          |
 
 ## Tecnologias

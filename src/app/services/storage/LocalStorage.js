@@ -2,15 +2,14 @@ const Readable = require('stream').Readable
 const fs = require('fs')
 
 class LocalStorage {
-  async storeAvatar (avatarBase64) {
+  async storeUserAvatar (avatarFile) {
     return new Promise((resolve, reject) => {
-      const base64 = avatarBase64.split(';base64,').pop()
-      const buffer = Buffer.from(base64, 'base64')
+      const fileExtension = avatarFile.originalname.split('.').pop()
       const readable = new Readable()
-      readable.push(buffer)
+      readable.push(avatarFile.buffer)
       readable.push(null)
 
-      const fileName = Date.now() + '.png'
+      const fileName = Date.now() + '.' + fileExtension
 
       readable.pipe(fs.createWriteStream(`${__dirname}/../../../public/uploads/avatars/${fileName}`)) // eslint-disable-line
         .on('error', error => reject(error))
@@ -19,15 +18,14 @@ class LocalStorage {
     })
   }
 
-  async storeSurveyBanner (bannerBase64) {
+  async storeSurveyBanner (bannerFile) {
     return new Promise((resolve, reject) => {
-      const base64 = bannerBase64.split(';base64,').pop()
-      const buffer = Buffer.from(base64, 'base64')
+      const fileExtension = bannerFile.originalname.split('.').pop()
       const readable = new Readable()
-      readable.push(buffer)
+      readable.push(bannerFile.buffer)
       readable.push(null)
 
-      const fileName = Date.now() + '.png'
+      const fileName = Date.now() + '.' + fileExtension
 
       readable.pipe(fs.createWriteStream(`${__dirname}/../../../public/uploads/banners/${fileName}`)) // eslint-disable-line
         .on('error', error => reject(error))

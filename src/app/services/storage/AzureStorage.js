@@ -3,7 +3,7 @@ const blobService = azure.createBlobService()
 const Readable = require('stream').Readable
 
 class AzureStorage {
-  async storeAvatar (avatarBase64) {
+  async storeUserAvatar (avatarFile) {
     return new Promise((resolve, reject) => {
       blobService.createContainerIfNotExists('storage', {
         publicAccessLevel: 'blob'
@@ -12,13 +12,12 @@ class AzureStorage {
           reject(error)
         }
 
-        const base64 = avatarBase64.split(';base64,').pop()
-        const buffer = Buffer.from(base64, 'base64')
+        const fileExtension = avatarFile.originalname.split('.').pop()
         const readable = new Readable()
-        readable.push(buffer)
+        readable.push(avatarFile.buffer)
         readable.push(null)
 
-        const fileName = Date.now() + '.png'
+        const fileName = Date.now() + '.' + fileExtension
 
         readable.pipe(blobService.createWriteStreamToBlockBlob('storage', `avatars/${fileName}`, {},
           function (error, result, response) {
@@ -31,7 +30,7 @@ class AzureStorage {
     })
   }
 
-  async storeSurveyBanner (bannerBase64) {
+  async storeSurveyBanner (bannerFile) {
     return new Promise((resolve, reject) => {
       blobService.createContainerIfNotExists('storage', {
         publicAccessLevel: 'blob'
@@ -40,13 +39,12 @@ class AzureStorage {
           reject(error)
         }
 
-        const base64 = bannerBase64.split(';base64,').pop()
-        const buffer = Buffer.from(base64, 'base64')
+        const fileExtension = bannerFile.originalname.split('.').pop()
         const readable = new Readable()
-        readable.push(buffer)
+        readable.push(bannerFile.buffer)
         readable.push(null)
 
-        const fileName = Date.now() + '.png'
+        const fileName = Date.now() + '.' + fileExtension
 
         readable.pipe(blobService.createWriteStreamToBlockBlob('storage', `banners/${fileName}`, {},
           function (error, result, response) {
