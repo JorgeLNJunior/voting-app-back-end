@@ -83,9 +83,6 @@ class SurveyValidator {
     if (survey[0].user_id != tokenId) { // eslint-disable-line
       throw new UnauthorizedError('unauthorized')
     }
-    if (!banner) {
-      throw new EmptyFieldError('banner is required')
-    }
     if (banner.size > 2000000) {
       throw new FieldLengthError('banner size must be less than 2mb')
     }
