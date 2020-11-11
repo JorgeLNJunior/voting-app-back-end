@@ -79,7 +79,7 @@ describe('register route', () => {
     expect(response.status).toBe(400)
   })
 
-  it('should return 400 if name is greater than 50', async () => {
+  it('should return 400 if name length is greater than 50', async () => {
     const body = Factory.generateUserData({
       name: 'name'.repeat(15)
     })
@@ -91,9 +91,9 @@ describe('register route', () => {
     expect(response.status).toBe(400)
   })
 
-  it('should return 400 if email is greater than 50', async () => {
+  it('should return 400 if email length is greater than 50', async () => {
     const body = Factory.generateUserData({
-      email: 'email'.repeat(15)
+      email: 'email'.repeat(15) + '@mail.com'
     })
 
     const response = await request(app)

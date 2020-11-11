@@ -24,6 +24,40 @@ describe('update survey', () => {
     expect(response.status).toBe(200)
   })
 
+  it('should return 400 if title length is greater than 50', async () => {
+    const data = Factory.generateSurveyData({ title: 'title'.repeat(20) })
+
+    const user = await Factory.createUser()
+    const survey = await Factory.createSurvey(user.id)
+
+    const token = AuthService.generateToken(user.id)
+
+    const response = await request(app)
+      .put(`/surveys/${survey.id}`)
+      .set('Content-Type', 'application/json')
+      .set('Authorization', `Bearer ${token}`)
+      .send({ title: data.title })
+
+    expect(response.status).toBe(400)
+  })
+
+  it('should return 400 if description length is greater than 150', async () => {
+    const data = Factory.generateSurveyData({ description: 'description'.repeat(15) })
+
+    const user = await Factory.createUser()
+    const survey = await Factory.createSurvey(user.id)
+
+    const token = AuthService.generateToken(user.id)
+
+    const response = await request(app)
+      .put(`/surveys/${survey.id}`)
+      .set('Content-Type', 'application/json')
+      .set('Authorization', `Bearer ${token}`)
+      .send({ description: data.description })
+
+    expect(response.status).toBe(400)
+  })
+
   it('should return 400 if title or description is not provided', async () => {
     const user = await Factory.createUser()
     const survey = await Factory.createSurvey(user.id)

@@ -131,6 +131,36 @@ describe('survey', () => {
     expect(response.status).toBe(400)
   })
 
+  it('should return 400 if title length is greater than 50', async () => {
+    const body = Factory.generateSurveyData({ title: 'title'.repeat(15) })
+
+    const user = await Factory.createUser()
+    const token = AuthService.generateToken(user.id)
+
+    const response = await request(app)
+      .post('/surveys')
+      .set('Content-Type', 'application/json')
+      .set('Authorization', `Bearer ${token}`)
+      .send(body)
+
+    expect(response.status).toBe(400)
+  })
+
+  it('should return 400 if description length is greater than 150', async () => {
+    const body = Factory.generateSurveyData({ description: 'description'.repeat(50) })
+
+    const user = await Factory.createUser()
+    const token = AuthService.generateToken(user.id)
+
+    const response = await request(app)
+      .post('/surveys')
+      .set('Content-Type', 'application/json')
+      .set('Authorization', `Bearer ${token}`)
+      .send(body)
+
+    expect(response.status).toBe(400)
+  })
+
   it('should return 401 if token is not provided', async () => {
     const body = Factory.generateSurveyData()
 
