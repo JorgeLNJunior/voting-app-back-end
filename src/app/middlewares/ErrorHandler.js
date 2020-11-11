@@ -3,6 +3,7 @@ const multer = require('multer')
 
 module.exports = function (err, req, res, next) {
   if (err instanceof multer.MulterError) {
+    /* istanbul ignore next */
     return res.status(400).json({ error: err.message })
   }
   if (err instanceof GeneralError) {
