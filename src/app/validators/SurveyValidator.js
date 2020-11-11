@@ -33,6 +33,14 @@ class SurveyValidator {
         throw new EmptyFieldError('field option name is required')
       }
     }
+
+    if (body.title.length > 50) {
+      throw new FieldLengthError('title field must be less than 50')
+    }
+
+    if (body.description.length > 150) {
+      throw new FieldLengthError('desciption field must be less than 150')
+    }
   }
 
   async validateUpdate (body, surveyId, tokenId) {
@@ -48,6 +56,13 @@ class SurveyValidator {
     }
     if (!title && !description) {
       throw new EmptyFieldError('title or description is required')
+    }
+    if (body.title && body.title.length > 50) {
+      throw new FieldLengthError('title field must be less than 50')
+    }
+
+    if (body.description && body.description.length > 150) {
+      throw new FieldLengthError('desciption field must be less than 150')
     }
   }
 
