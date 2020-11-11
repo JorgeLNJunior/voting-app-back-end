@@ -44,12 +44,21 @@ do repositório [app-ideas](https://github.com/florinpop17/app-ideas). Para mais
 | GET    | /docs                            | acessa a documentação da API | não          |
 
 ## Tecnologias
-- A fazer
+- Node.js
+- Express.js
+- Knex.js
+- MySQL
+- MongoDB
+- Azure Storage
+- Jest
+- Travis CI
+- Heroku
+
 
 ## Instalação e configuração
 - Requerimentos
-  - [Node.js](https://nodejs.org/en/download/) na sua versão LTS
-  - Um banco de dados [MySql](https://dev.mysql.com/downloads/)
+  - [Node.js](https://nodejs.org/en/download/) na sua versão 12.x
+  - Um banco de dados [MySql](https://dev.mysql.com/downloads/) nas sua versão 5.7
 - Opcional
   - Um banco de dados [MongoDB](https://www.mongodb.com/try/download/community) para os logs
   - Uma [storage account](https://azure.microsoft.com/en-us/services/storage/) no Azure para upload dos avatares e banners
