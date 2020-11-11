@@ -32,8 +32,17 @@ class UserValidator {
     if (body.password.length > 20) {
       throw new FieldLengthError('password field length must not be greater than 20')
     }
+
     if (!EMAIL_REGEX.test(body.email.toLowerCase())) {
       throw new InvalidEmailError('invalid email')
+    }
+
+    if (body.email.length > 50) {
+      throw new FieldLengthError('email field must be less than 50')
+    }
+
+    if (body.name.length > 50) {
+      throw new FieldLengthError('name field must be less than 50')
     }
   }
 

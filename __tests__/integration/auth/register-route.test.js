@@ -70,7 +70,31 @@ describe('register route', () => {
   })
 
   it('should return 400 if password length is greater than 20', async () => {
-    const body = Factory.generateUserData({ password: '000000000000000000000' })
+    const body = Factory.generateUserData({ password: '0'.repeat(21) })
+
+    const response = await request(app)
+      .post('/register')
+      .send(body)
+
+    expect(response.status).toBe(400)
+  })
+
+  it('should return 400 if name is greater than 50', async () => {
+    const body = Factory.generateUserData({
+      name: 'name'.repeat(15)
+    })
+
+    const response = await request(app)
+      .post('/register')
+      .send(body)
+
+    expect(response.status).toBe(400)
+  })
+
+  it('should return 400 if email is greater than 50', async () => {
+    const body = Factory.generateUserData({
+      email: 'email'.repeat(15)
+    })
 
     const response = await request(app)
       .post('/register')
