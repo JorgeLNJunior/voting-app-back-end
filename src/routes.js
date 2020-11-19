@@ -24,6 +24,7 @@ router.post('/surveys/:id/banner', upload.single('banner'), SurveyController.upd
 
 // user routes
 router.get('/users/', UserController.show)
+router.get('/users/:id/votes', UserController.getUserVotes)
 router.put('/users/:id', UserController.edit)
 router.delete('/users/:id', UserController.delete)
 router.post('/users/:id/password', UserController.updatePassword)
