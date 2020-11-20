@@ -48,6 +48,25 @@ describe('Vote add route', () => {
     expect(response.status).toBe(400)
   })
 
+  it('should return 400 if user has already voted', async () => {
+    const user = await Factory.createUser()
+    const survey = await Factory.createSurvey(user.id)
+
+    const token = AuthService.generateToken(user.id)
+
+    await request(app)
+      .post('/surveys/' + survey.id + '/vote/' + survey.options[0].id)
+      .set('Content-Type', 'application/json')
+      .set('Authorization', `Bearer ${token}`)
+
+    const response = await request(app)
+      .post('/surveys/' + survey.id + '/vote/' + survey.options[0].id)
+      .set('Content-Type', 'application/json')
+      .set('Authorization', `Bearer ${token}`)
+
+    expect(response.status).toBe(400)
+  })
+
   it('should return 401 if token is not provided', async () => {
     const user = await Factory.createUser()
     const survey = await Factory.createSurvey(user.id)

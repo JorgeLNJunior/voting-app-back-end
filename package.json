@@ -17,7 +17,7 @@
       "jest"
     ],
     "ignore": [
-      "/src/public",
+      "/public",
       "knexfile.js"
     ]
   },

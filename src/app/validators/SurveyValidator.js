@@ -2,9 +2,11 @@ const {
   EmptyFieldError,
   ResourceNotFoundError,
   UnauthorizedError,
-  FieldLengthError
+  FieldLengthError,
+  InvalidFieldError
 } = require('../helpers/Errors')
 const Survey = require('../models/Survey')
+const User = require('../models/User')
 
 class SurveyValidator {
   validateCreate (body) {
@@ -78,14 +80,22 @@ class SurveyValidator {
     }
   }
 
-  async validateAddVote (surveyId, optionId) {
+  async validateAddVote (surveyId, optionId, userId) {
     const survey = await Survey.show({ id: surveyId })
+    const votes = await User.getVotes(userId)
+    console.log(votes)
     if (!survey[0]) {
       throw new ResourceNotFoundError('survey not found')
     }
     // eslint-disable-next-line
     if (!survey[0].options.find(option => option.id == optionId )) {
       throw new ResourceNotFoundError('option not found')
+    }
+
+    for (let i = 0; i < votes.length; i++) {
+      if (votes[i].survey_id == surveyId) { // eslint-disable-line
+        throw new InvalidFieldError('you have already voted')
+      }
     }
   }
 

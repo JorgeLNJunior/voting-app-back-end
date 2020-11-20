@@ -17,7 +17,7 @@ const limiter = rateLimit({
 
 app.use(express.json())
 app.use(limiter)
-app.use(express.static(path.resolve(`${__dirname}/public`))) // eslint-disable-line
+app.use(express.static(path.resolve(`${__dirname}/../public`))) // eslint-disable-line
 app.use(cors())
 app.use(helmet())
 /* istanbul ignore next */
