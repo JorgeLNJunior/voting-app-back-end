@@ -23,7 +23,7 @@ do repositório [App Ideas](https://github.com/florinpop17/app-ideas).
 
 [Frontend](https://github.com/JorgeLNJunior/voting-app-front-end/) · [Backend](https://github.com/JorgeLNJunior/voting-app-back-end/)
 
-<a href="api-voting-app.herokuapp.com" target="_blank"><strong>API »</strong></a>
+<a href="https://api-voting-app.herokuapp.com" target="_blank"><strong>API »</strong></a>
 
 </div>
 
@@ -54,7 +54,7 @@ deste projeto.
 
 ## Rotas
 
-Informações básicas sobre as rotas da aplicação, para informações mais detalhadas visite a <a href="api-voting-app.herokuapp.com/docs" target="_blank"><strong>documentação da API »</strong></a>
+Informações básicas sobre as rotas da aplicação, para informações mais detalhadas visite a <a href="https://api-voting-app.herokuapp.com/docs" target="_blank"><strong>documentação da API »</strong></a>
 | HTTP   | Rota                             | Descrição                    | Autenticação |
 |--------|----------------------------------|------------------------------|--------------|
 | POST   | /register                        | registra um novo usuário     | não          |
