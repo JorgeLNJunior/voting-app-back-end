@@ -83,6 +83,7 @@ class SurveyValidator {
   async validateAddVote (surveyId, optionId, userId) {
     const survey = await Survey.show({ id: surveyId })
     const votes = await User.getVotes(userId)
+    console.log(votes)
     if (!survey[0]) {
       throw new ResourceNotFoundError('survey not found')
     }
@@ -92,7 +93,7 @@ class SurveyValidator {
     }
 
     for (let i = 0; i < votes.length; i++) {
-      if (votes[i].user_id == userId) { // eslint-disable-line
+      if (votes[i].survey_id == surveyId) { // eslint-disable-line
         throw new InvalidFieldError('you have already voted')
       }
     }
