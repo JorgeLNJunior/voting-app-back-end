@@ -16,8 +16,9 @@ class SurveyController {
   }
 
   async show (req, res, next) {
+    const query = req.query
     try {
-      const surveys = await Survey.show(req.query)
+      const surveys = await Survey.show(query)
       return res.json({ surveys })
     } catch (error) {
       next(error)
