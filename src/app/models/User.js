@@ -17,8 +17,11 @@ class User {
     return user
   }
 
-  async show (data) {
-    const user = await knex('users').where(data).orderByRaw('rand()').limit(20)
+  async show (query) {
+    const limit = Number(query.limit) || 20
+    if (query.limit) delete query.limit
+
+    const user = await knex('users').where(query).orderByRaw('rand()').limit(limit)
     return user
   }
 

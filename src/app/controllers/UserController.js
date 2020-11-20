@@ -17,7 +17,7 @@ class UserController {
     }
   }
 
-  async edit (req, res, next) {
+  async update (req, res, next) {
     const { name, avatar } = req.body
     const { id } = req.params
     try {

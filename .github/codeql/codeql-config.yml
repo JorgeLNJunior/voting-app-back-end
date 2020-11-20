@@ -4,6 +4,6 @@ queries:
   - name: security and quality
     uses: security-and-quality
 
-paths-ignore: 
+paths-ignore:
   - node_modules
-  - 'src/public/**'
+  - 'public/**'

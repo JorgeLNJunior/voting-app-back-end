@@ -21,8 +21,11 @@ class Survey {
     return survey
   }
 
-  async show (data) {
-    const surveys = await knex('surveys').where(data).orderByRaw('rand()').limit(20)
+  async show (query) {
+    const limit = Number(query.limit) || 20
+    if (query.limit) delete query.limit
+
+    const surveys = await knex('surveys').where(query).orderByRaw('rand()').limit(limit)
     for (const s of surveys) {
       const options = await knex('options').where({ survey_id: s.id })
       s.options = options
