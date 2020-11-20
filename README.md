@@ -75,24 +75,24 @@ Informações básicas sobre as rotas da aplicação, para informações mais de
 
 ## Tecnologias
 Este projeto foi contruído com as seguintes tecnologias:
-- Node.js
-- Express.js
-- Knex.js
-- MySQL
-- MongoDB
-- Azure Storage
-- Jest
-- Travis CI
-- Heroku
-
+- <a href="https://nodejs.org" target="_blank"><strong>Node.js »</strong></a>
+- <a href="https://expressjs.com" target="_blank"><strong>Express.js »</strong></a>
+- <a href="http://knexjs.org" target="_blank"><strong>Knex.js »</strong></a>
+- <a href="https://www.mysql.com" target="_blank"><strong>MySQL »</strong></a>
+- <a href="https://www.mongodb.com" target="_blank"><strong>MongoDB »</strong></a>
+- <a href="http://shorturl.at/jCJV2" target="_blank"><strong>Azure Storage »</strong></a>
+- <a href="https://jestjs.io" target="_blank"><strong>Jest »</strong></a>
+- <a href="https://travis-ci.org" target="_blank"><strong>Travis CI »</strong></a>
+- <a href="https://www.heroku.com" target="_blank"><strong>Heroku »</strong></a>
 
 ## Instalação e configuração
 ### Requisitos
-  - [Node.js](https://nodejs.org/en/download/) na sua versão 12.x
-  - Um banco de dados [MySQL](https://dev.mysql.com/downloads/) nas sua versão 5.7
+  - <a href="https://nodejs.org/en/download/" target="_blank"><strong>Node.js »</strong></a> na sua versão 12.x
+  - Um banco de dados <a href="https://dev.mysql.com/downloads/" target="_blank"><strong>MySQL »</strong></a> na sua versão 5.7
+
 ### Opcional
-  - Um banco de dados [MongoDB](https://www.mongodb.com/try/download/community) para os logs
-  - Uma [storage account](https://azure.microsoft.com/en-us/services/storage/) no Azure para upload dos avatares e banners
+  - Um banco de dados <a href="https://www.mongodb.com/try/download/community" target="_blank"><strong>MongoDB »</strong></a> para os logs
+  - Uma <a href="https://azure.microsoft.com/en-us/services/storage/" target="_blank"><strong>Azure Storage Account »</strong></a> para upload dos avatares e banners
 
 ### Instalação
   1. Clone o projeto: `git clone https://github.com/JorgeLNJunior/voting-app-back-end.git`
@@ -118,5 +118,5 @@ Este projeto foi contruído com as seguintes tecnologias:
 - [x] Only allow authenticated users to vote
 
 ## Licença
-Distribuido sob a licença [MIT](https://github.com/JorgeLNJunior/voting-app-back-end/blob/master/LICENSE.md)
+Distribuido sob a licença <a href="https://github.com/JorgeLNJunior/voting-app-back-end/blob/master/LICENSE.md" target="_blank"><strong>MIT »</strong></a>
 
