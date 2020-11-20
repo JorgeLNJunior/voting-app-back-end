@@ -11,7 +11,7 @@ class LocalStorage {
 
       const fileName = Date.now() + '.' + fileExtension
 
-      readable.pipe(fs.createWriteStream(`${__dirname}/../../../public/uploads/avatars/${fileName}`)) // eslint-disable-line
+      readable.pipe(fs.createWriteStream(`${__dirname}/../../../../public/uploads/avatars/${fileName}`)) // eslint-disable-line
         .on('error', error => reject(error))
 
       resolve(`http://0.0.0.0:3000/uploads/avatars/${fileName}`)
@@ -27,7 +27,7 @@ class LocalStorage {
 
       const fileName = Date.now() + '.' + fileExtension
 
-      readable.pipe(fs.createWriteStream(`${__dirname}/../../../public/uploads/banners/${fileName}`)) // eslint-disable-line
+      readable.pipe(fs.createWriteStream(`${__dirname}/../../../../public/uploads/banners/${fileName}`)) // eslint-disable-line
         .on('error', error => reject(error))
 
       resolve(`http://0.0.0.0:3000/uploads/banners/${fileName}`)

@@ -79,6 +79,16 @@ class UserController {
       next(error)
     }
   }
+
+  async getUserVotes (req, res, next) {
+    const { id } = req.params
+    try {
+      const votes = await User.getVotes(id)
+      return res.json({ votes })
+    } catch (error) {
+      next(error)
+    }
+  }
 }
 
 module.exports = new UserController()

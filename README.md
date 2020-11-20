@@ -30,13 +30,14 @@ do repositório [app-ideas](https://github.com/florinpop17/app-ideas). Para mais
 |--------|----------------------------------|------------------------------|--------------|
 | POST   | /register                        | registra um novo usuário     | não          |
 | POST   | /login                           | autentica um usuário         | não          |
-| GET    | /users/:id                       | lista um usuário             | sim          |
+| GET    | /users/?                         | lista um ou mais usuários    | sim          |
+| GET    | /users/:id/votes                 | lista os votos de um usuário | sim          |
 | POST   | /users/:id/password              | altera a senha do usuário    | sim          |
 | POST   | /users/:id/avatar                | altera o avatar do usuário   | sim          |
 | PUT    | /users/:id                       | edita um usuário             | sim          |
 | DELETE | /users/:id                       | deleta um usuário            | sim          |
 | POST   | /surveys                         | cria uma survey              | sim          |
-| GET    | /surveys/:surveyID               | lista uma survey             | não          |
+| GET    | /surveys/?                       | lista uma ou mais surveys    | não          |
 | POST   | /suveys/:surveyID/vote/:optionID | vota em uma opção            | sim          |
 | PUT    | /surveys/:surveyID               | edita uma survey             | sim          |
 | DELETE | /surveys/:surveyID               | deleta uma survey            | sim          |

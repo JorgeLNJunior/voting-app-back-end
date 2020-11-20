@@ -40,6 +40,14 @@ class User {
     const user = await knex('users').where({ id: userId }).first()
     return user
   }
+
+  async getVotes (userId) {
+    const votes = await knex('votes').where({
+      user_id: userId
+    })
+
+    return votes
+  }
 }
 
 module.exports = new User()

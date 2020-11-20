@@ -26,10 +26,11 @@ class SurveyController {
 
   async addVote (req, res, next) {
     try {
+      const userId = req.UID
       const { surveyId, optionId } = req.params
-      await validator.validateAddVote(surveyId, optionId)
+      await validator.validateAddVote(surveyId, optionId, userId)
 
-      const survey = await Survey.addVote(surveyId, optionId)
+      const survey = await Survey.addVote(surveyId, optionId, userId)
       return res.json(survey)
     } catch (error) {
       next(error)
