@@ -1,6 +1,6 @@
 {
   "name": "voting-app-back-end",
-  "version": "0.1.0",
+  "version": "2.6.0",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -25,8 +25,8 @@
     "type": "git",
     "url": "git+https://github.com/JorgeLNJunior/voting-app-back-end.git"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "JorgeLNJunior",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/JorgeLNJunior/voting-app-back-end/issues"
   },
