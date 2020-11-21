@@ -74,7 +74,7 @@ Informações básicas sobre as rotas da aplicação, para informações mais de
 | GET    | /docs                            | acessa a documentação da API | não          |
 
 ## Tecnologias
-Este projeto foi contruído com as seguintes tecnologias:
+Este projeto foi construído com as seguintes tecnologias:
 - <a href="https://nodejs.org" target="_blank"><strong>Node.js »</strong></a>
 - <a href="https://expressjs.com" target="_blank"><strong>Express.js »</strong></a>
 - <a href="http://knexjs.org" target="_blank"><strong>Knex.js »</strong></a>
